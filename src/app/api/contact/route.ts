@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 const TO_EMAIL = "atiehmusab@gmail.com";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://freelance-portfolio-lyart-one.vercel.app";
 const WINDOW_MS = 15 * 60 * 1000;
 const MAX_REQUESTS = 5;
 const MIN_FILL_MS = 2500;
@@ -118,7 +121,11 @@ async function sendWithWeb3Forms(opts: {
 
   const data = (await res.json()) as { success?: boolean; message?: string };
   if (!res.ok || !data.success) {
-    throw new Error(data.message || "Web3Forms failed");
+    return {
+      sent: false as const,
+      reason: "web3forms_failed" as const,
+      detail: data.message || "Web3Forms failed",
+    };
   }
 
   return { sent: true as const };
@@ -135,11 +142,14 @@ async function sendWithFormSubmit(opts: {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
+      Origin: SITE_URL,
+      Referer: `${SITE_URL}/`,
     },
     body: JSON.stringify({
       name: opts.name,
       email: opts.email,
       message: opts.message,
+      _replyto: opts.email,
       _subject: opts.subject,
       _template: "table",
       _captcha: "false",
@@ -154,25 +164,26 @@ async function sendWithFormSubmit(opts: {
     // non-json response
   }
 
-  const success =
-    data.success === true ||
-    data.success === "true" ||
-    /success/i.test(raw);
+  const msg = String(data.message || raw || "");
+  const success = data.success === true || data.success === "true";
 
-  if (!res.ok || !success) {
-    const msg = data.message || raw || "FormSubmit failed";
-    // Activation required is common on first use
-    if (/activat|confirm|verify/i.test(msg)) {
-      return {
-        sent: false as const,
-        reason: "activation_required" as const,
-        detail: msg,
-      };
-    }
-    throw new Error(msg);
+  if (success) {
+    return { sent: true as const };
   }
 
-  return { sent: true as const };
+  if (/activat|confirm|verify/i.test(msg)) {
+    return {
+      sent: false as const,
+      reason: "activation_required" as const,
+      detail: msg,
+    };
+  }
+
+  return {
+    sent: false as const,
+    reason: "formsubmit_failed" as const,
+    detail: msg || "FormSubmit failed",
+  };
 }
 
 function escapeHtml(value: string) {
@@ -206,7 +217,6 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Honeypot — obscure name so browsers don't autofill it
   const honeypot = String(body.company_fax || "").trim();
   if (honeypot) {
     return NextResponse.json({ ok: true });
@@ -259,19 +269,16 @@ export async function POST(request: NextRequest) {
   const subject = `Portfolio contact from ${name}`;
 
   try {
-    // 1) Gmail SMTP (most reliable once App Password is set on Vercel)
     const gmail = await sendWithGmail({ name, email, message, subject, ip });
     if (gmail.sent) {
       return NextResponse.json({ ok: true, via: "gmail" });
     }
 
-    // 2) Web3Forms (if access key is set)
     const web3 = await sendWithWeb3Forms({ name, email, message, subject });
     if (web3.sent) {
       return NextResponse.json({ ok: true, via: "web3forms" });
     }
 
-    // 3) FormSubmit fallback (needs one-time activation email)
     const formSubmit = await sendWithFormSubmit({
       name,
       email,
@@ -280,26 +287,27 @@ export async function POST(request: NextRequest) {
     });
 
     if (formSubmit.sent) {
-      return NextResponse.json({
-        ok: true,
-        via: "formsubmit",
-        note: "If this is the first message ever, check Gmail inbox/spam for a FormSubmit activation email and click Confirm once.",
-      });
+      return NextResponse.json({ ok: true, via: "formsubmit" });
     }
 
     if (formSubmit.reason === "activation_required") {
-      return NextResponse.json({
-        ok: false,
-        error:
-          "Check atiehmusab@gmail.com (Inbox + Spam) for a FormSubmit activation email and click Confirm. Then send again. Or WhatsApp +962 780 852 828.",
-      });
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "One-time setup needed: open atiehmusab@gmail.com (Inbox + Spam), find the FormSubmit email, click Activate Form, then send again.",
+          code: "activation_required",
+        },
+        { status: 403 }
+      );
     }
 
     return NextResponse.json(
       {
         ok: false,
         error:
-          "Email delivery is not fully configured yet. Please WhatsApp +962 780 852 828 or email atiehmusab@gmail.com directly.",
+          "Email service is not ready yet. WhatsApp +962 780 852 828 or email atiehmusab@gmail.com.",
+        detail: "detail" in formSubmit ? formSubmit.detail : undefined,
       },
       { status: 503 }
     );
