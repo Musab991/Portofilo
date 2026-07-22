@@ -97,13 +97,24 @@
   animation: rise 0.8s ease 0.32s both;
 }
 
-.heroFacts span {
+.heroFacts span,
+.heroFactLink {
   font-size: 0.82rem;
   color: var(--muted);
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--surface) 75%, transparent);
+}
+
+.heroFactLink {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.heroFactLink:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
 }
 
 .btnPrimary,

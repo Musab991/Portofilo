@@ -43,6 +43,9 @@ export default function Home() {
               <span>{site.availability}</span>
               <span>{site.location}</span>
               <span>{site.rate}</span>
+              <a className={styles.heroFactLink} href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+                {site.phone}
+              </a>
             </div>
           </div>
           <div className={styles.heroPortraitWrap}>

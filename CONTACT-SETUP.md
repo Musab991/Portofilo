@@ -1,28 +1,39 @@
-# Contact form setup
+# Fix contact email (so messages reach Gmail)
 
-The contact form posts to `/api/contact` and delivers mail to `atiehmusab@gmail.com`.
+Your form can send in 3 ways. **Gmail App Password is the most reliable.**
 
-## Spam protection included
+## Option A — Gmail App Password (recommended, ~2 minutes)
 
-- Hidden honeypot field (bots often fill it; those messages are dropped)
-- Minimum fill time (~3 seconds) before submit is accepted
-- Rate limit: max 3 messages per IP every 15 minutes
-- Field length limits + basic spam keyword / link checks
-- Submit button disables while sending
+1. Open Google Account → **Security**
+2. Turn on **2-Step Verification** (required)
+3. Create an **App password** (App: Mail)
+4. Copy the 16-character password
+5. In [Vercel project settings → Environment Variables](https://vercel.com/lords5/freelance-portfolio/settings/environment-variables) add:
 
-## First-time email activation (important)
+| Name | Value |
+| --- | --- |
+| `GMAIL_USER` | `atiehmusab@gmail.com` |
+| `GMAIL_APP_PASSWORD` | *(the 16-char app password)* |
 
-Until you add a Resend API key, delivery uses **FormSubmit**.
+6. Redeploy the site
+7. Send a test message from the contact form
 
-1. Send one test message from the live contact form
-2. Check `atiehmusab@gmail.com` (inbox + spam)
-3. Open the FormSubmit activation email and confirm once
-4. After that, new form messages arrive as normal emails
+Messages will arrive in **atiehmusab@gmail.com** with Reply-To set to the client’s email.
 
-## Optional upgrade: Resend
+## Option B — Web3Forms (free key)
 
-1. Create a free key at [resend.com](https://resend.com)
-2. In Vercel → Project → Settings → Environment Variables, add:
-   - `RESEND_API_KEY=re_...`
-   - optional: `RESEND_FROM=Portfolio <onboarding@resend.dev>`
+1. Get a key at [web3forms.com](https://web3forms.com) (enter your email)
+2. Add Vercel env: `WEB3FORMS_ACCESS_KEY=your_key`
 3. Redeploy
+
+## Option C — FormSubmit (current fallback)
+
+First submission may only send an **activation** email (check Inbox + Spam).
+Click Confirm once, then try again.
+
+## Spam protection still active
+
+- Hidden honeypot (renamed so Chrome won’t autofill it)
+- Min fill time
+- Rate limit per IP
+- Length + spam checks

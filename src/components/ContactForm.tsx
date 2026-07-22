@@ -9,6 +9,7 @@ export function ContactForm() {
     "idle"
   );
   const [error, setError] = useState("");
+  const [note, setNote] = useState("");
   const [startedAt, setStartedAt] = useState(0);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export function ContactForm() {
 
     setStatus("sending");
     setError("");
+    setNote("");
 
     try {
       const response = await fetch("/api/contact", {
@@ -33,38 +35,48 @@ export function ContactForm() {
           name: String(data.get("name") || "").trim(),
           email: String(data.get("email") || "").trim(),
           message: String(data.get("message") || "").trim(),
-          website: String(data.get("website") || "").trim(), // honeypot
+          company_fax: String(data.get("company_fax") || "").trim(),
           startedAt,
         }),
       });
 
-      const result = (await response.json()) as { ok?: boolean; error?: string };
+      const result = (await response.json()) as {
+        ok?: boolean;
+        error?: string;
+        note?: string;
+      };
 
       if (!response.ok || !result.ok) {
         setStatus("error");
-        setError(result.error || "Something went wrong. Please email me directly.");
+        setError(
+          result.error ||
+            `Something went wrong. WhatsApp ${site.phone} or email ${site.email}.`
+        );
         return;
       }
 
       setStatus("sent");
+      setNote(result.note || "");
       form.reset();
       setStartedAt(Date.now());
     } catch {
       setStatus("error");
-      setError("Network error. Please email me directly or call/WhatsApp.");
+      setError(
+        `Network error. WhatsApp ${site.phone} or email ${site.email}.`
+      );
     }
   }
 
   return (
-    <form className={styles.form} onSubmit={onSubmit} noValidate={false}>
-      {/* Honeypot — hidden from people, bots often fill it */}
+    <form className={styles.form} onSubmit={onSubmit} autoComplete="on">
+      {/* Honeypot — not named "website" (browsers autofill that and block real sends) */}
       <label className={styles.honeypot} aria-hidden="true">
-        <span>Website</span>
+        <span>Company fax</span>
         <input
-          name="website"
+          name="company_fax"
           type="text"
           tabIndex={-1}
-          autoComplete="off"
+          autoComplete="new-password"
         />
       </label>
 
@@ -110,14 +122,17 @@ export function ContactForm() {
           Or email{" "}
           <a href={`mailto:${site.email}`}>{site.email}</a>
           {" · "}
+          <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a>
+          {" · "}
           <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
-            WhatsApp {site.phone}
+            WhatsApp
           </a>
         </p>
       </div>
       {status === "sent" && (
         <p className={styles.status} role="status">
           Message sent. I usually reply within {site.replyWithin}.
+          {note ? ` ${note}` : ""}
         </p>
       )}
       {status === "error" && (
