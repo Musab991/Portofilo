@@ -6,6 +6,8 @@ export const site = {
     "I design database schemas, write complex stored procedures, and build APIs for data-heavy systems — AVL tracking, notifications, and high-throughput backends.",
   location: "Amman, Jordan",
   email: "atiehmusab@gmail.com",
+  phone: "+962 780 852 828",
+  whatsapp: "https://wa.me/962780852828",
   availability: "Open to freelance backend & database projects",
   rate: "$20/hr (typical range $20–35/hr)",
   replyWithin: "12–24 hours",

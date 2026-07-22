@@ -21,25 +21,25 @@ Update `src/data/portfolio.ts` — every `[PLACEHOLDER]` is meant to be replaced
 
 See `NEED-FROM-YOU.md` for the checklist of details still needed.
 
-## Deploy
+## Deploy on Vercel (recommended)
 
-### Vercel
+### Option A — Dashboard (easiest)
 
-1. Push this repo to GitHub.
-2. Import the repo in [Vercel](https://vercel.com/new).
-3. Deploy (Next.js defaults work as-is).
+1. Create a free account at [vercel.com/signup](https://vercel.com/signup)
+2. Push this project to GitHub (or import the folder)
+3. In Vercel: **Add New Project** → import the repo
+4. Leave defaults (Framework: Next.js) → **Deploy**
+5. Copy your live URL (e.g. `https://freelance-portfolio.vercel.app`) into Upwork / LinkedIn
 
-### Netlify
+### Option B — CLI
 
-1. Push to GitHub.
-2. New site from Git in Netlify.
-3. Build command: `npm run build`
-4. Publish directory: `.next` — or use the [Netlify Next.js runtime](https://docs.netlify.com/frameworks/next-js/overview/).
+```bash
+npx vercel login
+npx vercel --prod
+```
 
-For a fully static export later, you can add `output: "export"` in `next.config.ts` if you do not need server features.
+After the first deploy, later pushes to the connected GitHub branch auto-update the site.
 
-## Stack
+## Edit your content
 
-- Next.js (App Router)
-- TypeScript
-- CSS Modules (no Tailwind dependency)
+Update `src/data/portfolio.ts` — name, projects, rate, links, etc.

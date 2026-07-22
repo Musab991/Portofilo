@@ -94,6 +94,18 @@ export default function Home() {
                     <a href={`mailto:${site.email}`}>{site.email}</a>
                   </dd>
                 </div>
+                <div>
+                  <dt>Phone / WhatsApp</dt>
+                  <dd>
+                    <a
+                      href={site.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {site.phone}
+                    </a>
+                  </dd>
+                </div>
               </dl>
             </aside>
           </div>
@@ -232,8 +244,16 @@ export default function Home() {
                 <p>
                   Tell me about the API, database, or tracking system you need.
                   Email{" "}
-                  <a href={`mailto:${site.email}`}>{site.email}</a> — I usually
-                  reply within {site.replyWithin}.
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
+                  {" · "}
+                  <a
+                    href={site.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WhatsApp {site.phone}
+                  </a>
+                  . I usually reply within {site.replyWithin}.
                 </p>
                 <div className={styles.contactLinks}>
                   {profileLinks.map((link) => (
@@ -262,6 +282,10 @@ export default function Home() {
         </p>
         <p>
           <a href={`mailto:${site.email}`}>{site.email}</a>
+          {" · "}
+          <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+            {site.phone}
+          </a>
         </p>
       </footer>
     </div>
