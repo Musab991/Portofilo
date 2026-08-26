@@ -4,12 +4,13 @@ import { FormEvent, useEffect, useState } from "react";
 import { site } from "@/data/portfolio";
 import styles from "./ContactForm.module.css";
 
+const MIN_FILL_MS = 2500;
+
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
   const [error, setError] = useState("");
-  const [note, setNote] = useState("");
   const [startedAt, setStartedAt] = useState(0);
 
   useEffect(() => {
@@ -22,54 +23,88 @@ export function ContactForm() {
 
     const form = event.currentTarget;
     const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    const honeypot = String(data.get("company_fax") || "").trim();
+
+    if (honeypot) {
+      setStatus("sent");
+      form.reset();
+      return;
+    }
+
+    if (!name || !email || !message) {
+      setStatus("error");
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    if (Date.now() - startedAt < MIN_FILL_MS) {
+      setStatus("error");
+      setError("Please take a moment and try again.");
+      return;
+    }
 
     setStatus("sending");
     setError("");
-    setNote("");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: String(data.get("name") || "").trim(),
-          email: String(data.get("email") || "").trim(),
-          message: String(data.get("message") || "").trim(),
-          company_fax: String(data.get("company_fax") || "").trim(),
-          startedAt,
-        }),
-      });
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(site.email)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+            _replyto: email,
+            _subject: `Portfolio contact from ${name}`,
+            _template: "table",
+            _captcha: "false",
+          }),
+        }
+      );
 
       const result = (await response.json()) as {
-        ok?: boolean;
-        error?: string;
-        note?: string;
+        success?: string | boolean;
+        message?: string;
       };
 
-      if (!response.ok || !result.ok) {
-        setStatus("error");
-        setError(
-          result.error ||
-            `Something went wrong. WhatsApp ${site.phone} or email ${site.email}.`
-        );
-        return;
+      const ok =
+        result.success === true ||
+        result.success === "true" ||
+        response.ok;
+
+      if (!ok) {
+        const msg = result.message || "";
+        if (/activat|confirm|verify/i.test(msg)) {
+          setStatus("error");
+          setError(
+            "One-time setup: check atiehmusab@gmail.com (Inbox + Spam) for a FormSubmit activation email, click Confirm, then try again."
+          );
+          return;
+        }
+        throw new Error(msg || "Send failed");
       }
 
       setStatus("sent");
-      setNote(result.note || "");
       form.reset();
       setStartedAt(Date.now());
     } catch {
       setStatus("error");
       setError(
-        `Network error. WhatsApp ${site.phone} or email ${site.email}.`
+        `Could not send. WhatsApp ${site.phone} or email ${site.email}.`
       );
     }
   }
 
   return (
     <form className={styles.form} onSubmit={onSubmit} autoComplete="on">
-      {/* Honeypot — not named "website" (browsers autofill that and block real sends) */}
       <label className={styles.honeypot} aria-hidden="true">
         <span>Company fax</span>
         <input
@@ -132,7 +167,6 @@ export function ContactForm() {
       {status === "sent" && (
         <p className={styles.status} role="status">
           Message sent. I usually reply within {site.replyWithin}.
-          {note ? ` ${note}` : ""}
         </p>
       )}
       {status === "error" && (

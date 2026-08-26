@@ -1,43 +1,44 @@
-# Custom domain setup (musabatieh.com)
+# Custom domain — GitHub Pages (musabatieh.com)
 
-Your portfolio runs on **Vercel**, not GitHub Pages.
+This site is published via **GitHub Pages**, not Vercel.
 
-If DNS points to GitHub (185.199.108.x), visitors see the **README text** instead of your website.
+## Step 1 — Enable GitHub Pages
 
-## Step 1 — Add domain in Vercel
+1. Open [github.com/Musab991/Portofilo/settings/pages](https://github.com/Musab991/Portofilo/settings/pages)
+2. **Build and deployment → Source:** GitHub Actions
+3. After pushing to `main`, the workflow **Deploy to GitHub Pages** runs automatically
+4. Wait until it shows a green checkmark under **Actions**
 
-1. Open [Vercel → freelance-portfolio → Settings → Domains](https://vercel.com/lords5/freelance-portfolio/settings/domains)
-2. Add `musabatieh.com`
-3. Add `www.musabatieh.com`
-4. Vercel will show the exact DNS records to use — copy those
+## Step 2 — Hostinger DNS (keep GitHub records)
 
-## Step 2 — Fix DNS in Hostinger
+| Type | Name | Value |
+| --- | --- | --- |
+| **A** | `@` | `185.199.108.153` |
+| **A** | `@` | `185.199.109.153` |
+| **A** | `@` | `185.199.110.153` |
+| **A** | `@` | `185.199.111.153` |
+| **CNAME** | `www` | `musab991.github.io` |
 
-Replace the current GitHub records with Vercel records:
+Important: `www` must point to **`musab991.github.io`** (your GitHub username), not `musabatieh.github.io`.
 
-| Type | Name | Value | TTL |
-| --- | --- | --- | --- |
-| **A** | `@` | `76.76.21.21` | 3600 (or default) |
-| **CNAME** | `www` | `cname.vercel-dns.com` | 3600 |
+## Step 3 — Custom domain in GitHub
 
-**Remove** these old GitHub Pages records:
-- A records → `185.199.108.153`, `.109.`, `.110.`, `.111.`
-- CNAME `www` → `musabatieh.github.io`
+1. Repo → **Settings → Pages → Custom domain**
+2. Enter `musabatieh.com` → Save
+3. Wait for DNS check (can take up to 24h, usually ~1h)
+4. Enable **Enforce HTTPS** when available
 
-## Step 3 — Disable GitHub Pages (optional but recommended)
+## Step 4 — Test
 
-1. GitHub repo → **Settings** → **Pages**
-2. Set Source to **None** / disable Pages
-3. This stops GitHub from serving README on your domain
+- https://musabatieh.com — your portfolio (hero, projects, contact)
+- https://musab991.github.io/Portofilo/ — backup URL (project path)
 
-## Step 4 — Wait and test
+## Contact form on GitHub Pages
 
-DNS can take **5 minutes to 48 hours** (usually under 1 hour).
+The form uses **FormSubmit** directly from the browser (no server API).
 
-Test:
-- https://musabatieh.com — should show your portfolio (hero, projects, contact)
-- https://freelance-portfolio-lyart-one.vercel.app — always works as backup
+First message may require activating FormSubmit via email to `atiehmusab@gmail.com` (check Spam).
 
-## Why you saw README text
+## If you still see README text
 
-GitHub Pages only serves static files. It rendered `README.md` because your DNS pointed there. Next.js needs Vercel (or similar) to run the app.
+The GitHub Actions deploy has not finished yet. Check **Actions** tab — wait for **Deploy to GitHub Pages** to complete, then hard-refresh the site.
