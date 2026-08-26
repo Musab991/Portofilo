@@ -35,4 +35,4 @@ Change **`src/data/portfolio.ts`** for name, phone, projects, skills, and links.
 ## Live site
 
 - Vercel: https://freelance-portfolio-lyart-one.vercel.app
-- Custom domain: musabatieh.com (via CNAME)
+- Custom domain: [musabatieh.com](https://musabatieh.com) — must point DNS to **Vercel**, not GitHub Pages. See [docs/domain-setup.md](docs/domain-setup.md).
