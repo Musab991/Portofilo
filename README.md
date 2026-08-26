@@ -1,10 +1,20 @@
-# Freelance portfolio
+# Musab Atieh — Portfolio
 
-Single-page Next.js portfolio for Upwork / Freelancer.com positioning.
+Freelance ASP.NET Core & SQL backend developer portfolio.
 
-## Sections
+**Live site:** [freelance-portfolio-lyart-one.vercel.app](https://freelance-portfolio-lyart-one.vercel.app) · [musabatieh.com](https://musabatieh.com)
 
-Hero · About · Skills · Projects (case studies) · Testimonials · Contact
+## Folder structure
+
+| Folder | Purpose |
+| --- | --- |
+| `public/` | Photos, project screenshots, static assets |
+| `src/app/` | Next.js pages and `/api/contact` |
+| `src/components/` | Header, contact form, UI |
+| `src/data/portfolio.ts` | **Your content** — name, phone, projects, skills |
+| `docs/` | Setup guides |
+
+See [docs/repo-structure.md](docs/repo-structure.md) for full layout.
 
 ## Quick start
 
@@ -15,31 +25,22 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Edit your content
+## Deploy
 
-Update `src/data/portfolio.ts` — every `[PLACEHOLDER]` is meant to be replaced.
-
-See `NEED-FROM-YOU.md` for the checklist of details still needed.
-
-## Deploy on Vercel (recommended)
-
-### Option A — Dashboard (easiest)
-
-1. Create a free account at [vercel.com/signup](https://vercel.com/signup)
-2. Push this project to GitHub (or import the folder)
-3. In Vercel: **Add New Project** → import the repo
-4. Leave defaults (Framework: Next.js) → **Deploy**
-5. Copy your live URL (e.g. `https://freelance-portfolio.vercel.app`) into Upwork / LinkedIn
-
-### Option B — CLI
+Connected to **Vercel**. Push to `main` to trigger a new deploy:
 
 ```bash
-npx vercel login
-npx vercel --prod
+git add .
+git commit -m "Update portfolio"
+git push origin main
 ```
 
-After the first deploy, later pushes to the connected GitHub branch auto-update the site.
+Or redeploy from the [Vercel dashboard](https://vercel.com/lords5/freelance-portfolio).
 
-## Edit your content
+## Contact form email
 
-Update `src/data/portfolio.ts` — name, projects, rate, links, etc.
+See [docs/contact-setup.md](docs/contact-setup.md) for Gmail App Password setup on Vercel.
+
+## Stack
+
+Next.js 16 · TypeScript · CSS Modules · Nodemailer · Vercel
