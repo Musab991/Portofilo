@@ -1,44 +1,41 @@
-# Custom domain — GitHub Pages (musabatieh.com)
+# GitHub Pages setup — READ THIS
 
-This site is published via **GitHub Pages**, not Vercel.
+Your site showed **README text** because Pages was set to deploy **`main` branch / (root)**.
+That serves the markdown files — not the built website.
 
-## Step 1 — Enable GitHub Pages
+## Fix (2 minutes)
 
-1. Open [github.com/Musab991/Portofilo/settings/pages](https://github.com/Musab991/Portofilo/settings/pages)
-2. **Build and deployment → Source:** GitHub Actions
-3. After pushing to `main`, the workflow **Deploy to GitHub Pages** runs automatically
-4. Wait until it shows a green checkmark under **Actions**
+### Step 1 — Change Pages source
 
-## Step 2 — Hostinger DNS (keep GitHub records)
+1. Open [Settings → Pages](https://github.com/Musab991/Portofilo/settings/pages)
+2. Under **Build and deployment → Source**, change:
+   - **From:** Deploy from a branch → `main` / `(root)` ❌
+   - **To:** Deploy from a branch → **`gh-pages`** / **`/(root)`** ✅
+3. Click **Save**
+
+### Step 2 — Wait for Actions
+
+1. Open [Actions tab](https://github.com/Musab991/Portofilo/actions)
+2. Wait for **Deploy to GitHub Pages** to finish with a green checkmark
+3. If it failed, click **Re-run all jobs**
+
+### Step 3 — Test
+
+- https://musabatieh.com — should show your portfolio (hero, photo, projects)
+- Hard refresh: `Ctrl + F5`
+
+## DNS (Hostinger) — you already have this correct
 
 | Type | Name | Value |
 | --- | --- | --- |
-| **A** | `@` | `185.199.108.153` |
-| **A** | `@` | `185.199.109.153` |
-| **A** | `@` | `185.199.110.153` |
-| **A** | `@` | `185.199.111.153` |
-| **CNAME** | `www` | `musab991.github.io` |
+| A | `@` | `185.199.108.153` (+ .109, .110, .111) |
+| CNAME | `www` | `musab991.github.io` |
 
-Important: `www` must point to **`musab991.github.io`** (your GitHub username), not `musabatieh.github.io`.
+## Do NOT use
 
-## Step 3 — Custom domain in GitHub
+- **main / (root)** as Pages source — shows README only
+- CNAME file at repo root on `main` — not needed (it's inside `public/` and copied to the build)
 
-1. Repo → **Settings → Pages → Custom domain**
-2. Enter `musabatieh.com` → Save
-3. Wait for DNS check (can take up to 24h, usually ~1h)
-4. Enable **Enforce HTTPS** when available
+## Contact form
 
-## Step 4 — Test
-
-- https://musabatieh.com — your portfolio (hero, projects, contact)
-- https://musab991.github.io/Portofilo/ — backup URL (project path)
-
-## Contact form on GitHub Pages
-
-The form uses **FormSubmit** directly from the browser (no server API).
-
-First message may require activating FormSubmit via email to `atiehmusab@gmail.com` (check Spam).
-
-## If you still see README text
-
-The GitHub Actions deploy has not finished yet. Check **Actions** tab — wait for **Deploy to GitHub Pages** to complete, then hard-refresh the site.
+Uses FormSubmit from the browser. First send may need activation email in `atiehmusab@gmail.com` (check Spam).
