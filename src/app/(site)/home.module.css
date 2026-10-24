@@ -8,8 +8,12 @@
 .photo {
   width: 160px;
   height: 160px;
+  aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
+  /* The source is a tall portrait: anchor near the top so the full head and
+     a little space above it stay inside the circle (centered crop cut it off). */
+  object-position: 50% 5%;
   border: 4px solid var(--accent-bg);
   grid-row: 1;
 }

@@ -29,7 +29,6 @@ These stay local only (already in `.gitignore`):
 - `node_modules/`
 - `.next/`
 - `out/`
-- `.vercel/`
 - `.env*` (secrets)
 
 ## Edit content

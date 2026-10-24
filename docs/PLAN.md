@@ -19,7 +19,7 @@ Status: **planning**. Only app change so far: fake testimonials removed from `po
 
 Issues found while skimming (fix during Phase 1):
 - ~~`testimonials` in `portfolio.ts`~~ — owner confirmed they were not real; removed from data and page (done). No testimonials until real students give permission.
-- `docs/contact-setup.md` and `docs/repo-structure.md` still describe Vercel + `api/contact` routes, which don't exist on a static export. Update or delete.
+- `docs/contact-setup.md` and `docs/repo-structure.md` still describe a server-hosted deploy + `api/contact` routes, which don't exist on a static export. Update or delete.
 - `<html lang="en">` is global; workshop pages need `lang="ar" dir="rtl"`.
 
 ### Next.js 16 constraints verified in `node_modules/next/dist/docs/`
@@ -308,7 +308,7 @@ Tasks:
 - Split the single page into `/`, `/projects/`, `/projects/[id]/`, `/cv/`, `/contact/`; keep data in `src/data/`.
 - CV page + print CSS + `public/cv/Musab-Atieh-CV.pdf`.
 - `not-found.tsx`, `sitemap.ts`, `robots.ts`, per-page `metadata`.
-- (Done) Testimonials removed. Update stale docs (Vercel/API references).
+- (Done) Testimonials removed. Update stale docs (hosting/API references).
 Acceptance:
 - `npm run build` passes; `out/` contains `index.html`, `projects/index.html`, `cv/index.html`, `contact/index.html`, `workshops/index.html` (placeholder OK).
 - No horizontal scroll at 360px; Lighthouse mobile Accessibility ≥ 95, Performance ≥ 90.
