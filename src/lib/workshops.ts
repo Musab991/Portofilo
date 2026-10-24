@@ -31,7 +31,10 @@ export type Cohort = {
   earlyBird: { price: number; until: string } | null;
   mode: Mode | null;
   location: string | null;
+  /** Optional external form (e.g. a future Google Form). The on-site form is preferred. */
   registrationUrl: string | null;
+  /** Inbox for the on-site registration form (FormSubmit). Set = on-site form enabled. */
+  registrationEmail: string | null;
   waitlistUrl: string | null;
   paymentUrl: string | null;
   paymentMethods: string[];
@@ -184,6 +187,7 @@ function parseCohort(file: string, raw: Raw): Cohort {
     mode: raw.mode == null ? null : oneOf(file, raw.mode, MODES, "cohort.mode"),
     location: str(file, raw, "location", false),
     registrationUrl: url(str(file, raw, "registrationUrl", false)),
+    registrationEmail: email(file, str(file, raw, "registrationEmail", false)),
     waitlistUrl: url(str(file, raw, "waitlistUrl", false)),
     paymentUrl: url(str(file, raw, "paymentUrl", false)),
     paymentMethods: cleanItems(list(file, raw, "paymentMethods", false)),
@@ -195,6 +199,18 @@ function parseCohort(file: string, raw: Raw): Cohort {
 /** Only real http(s) links count; anything else (TODO, placeholders) is treated as missing. */
 function url(value: string | null): string | null {
   return value && /^https?:\/\//.test(value) && !/TODO/i.test(value) ? value : null;
+}
+
+/** An email address, or the random FormSubmit alias from its activation email (hides the address). */
+function email(file: string, value: string | null): string | null {
+  if (value === null) return null;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && !/^[a-z0-9]{16,}$/i.test(value)) {
+    throw new ContentError(
+      file,
+      `"registrationEmail" must be an email address or a FormSubmit alias (got "${value}")`
+    );
+  }
+  return value;
 }
 
 function render(markdown: string): string {
@@ -211,6 +227,9 @@ function parseLevel(file: string): Level {
   const slug = String(str(file, raw, "slug"));
   if (slug !== file.replace(/\.md$/, "")) {
     throw new ContentError(file, `slug "${slug}" must equal the file name without .md`);
+  }
+  if (slug === "register") {
+    throw new ContentError(file, `slug "register" is reserved for /workshops/register/`);
   }
   const level = num(file, raw, "level");
   if (level === null) throw new ContentError(file, `missing required field "level"`);
@@ -344,4 +363,62 @@ export function getNextCohort(): { level: Level; cohort: Cohort } | null {
       (a.cohort.startDate ?? "9999").localeCompare(b.cohort.startDate ?? "9999")
   );
   return all[0] ?? null;
+}
+
+/* ---------- Registration ---------- */
+
+/** A cohort accepts registrations when it is "open" and has an on-site inbox or an external form. */
+export function isRegistrable(cohort: Cohort): boolean {
+  return cohort.status === "open" && Boolean(cohort.registrationEmail || cohort.registrationUrl);
+}
+
+/** On-site register page of a level (without basePath; use with next/link). */
+export function registerPath(level: Level): string {
+  return `/workshops/${level.slug}/register/`;
+}
+
+/**
+ * Where the "سجّل الآن" button goes: the on-site form when the cohort has a
+ * registrationEmail, otherwise its external registrationUrl. null = no button.
+ */
+export function registrationLink(
+  level: Level,
+  cohort: Cohort | null
+): { href: string; external: boolean } | null {
+  if (!cohort || !isRegistrable(cohort)) return null;
+  if (cohort.registrationEmail) return { href: registerPath(level), external: false };
+  return { href: String(cohort.registrationUrl), external: true };
+}
+
+/** Cohorts of a level that take sign-ups through the on-site form, best first. */
+export function formCohorts(level: Level): Cohort[] {
+  return visibleCohorts(level).filter((c) => isRegistrable(c) && c.registrationEmail);
+}
+
+/** Levels with at least one cohort that takes sign-ups through the on-site form. */
+export function getRegistrableLevels(): Level[] {
+  return getLevels().filter((level) => formCohorts(level).length > 0);
+}
+
+/** "مخيم تجهيز الخريجين: من مشروع التخرج لأول وظيفة" → "مخيم تجهيز الخريجين" */
+export function shortTitle(level: Level): string {
+  return level.title.split(/[:：]/)[0].trim();
+}
+
+const SUBJECT_MONTHS = [
+  "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+  "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر",
+];
+
+/**
+ * Email subject without the student's name (the form appends " — <الاسم>"), e.g.
+ * "تسجيل جديد — مخيم تجهيز الخريجين (Level 1) — دفعة 21 ديسمبر 2026".
+ */
+export function registrationSubject(level: Level, cohort: Cohort): string {
+  let cohortLabel = cohort.name;
+  if (cohort.startDate) {
+    const [y, m, d] = cohort.startDate.split("-").map(Number);
+    cohortLabel = `دفعة ${d} ${SUBJECT_MONTHS[m - 1]} ${y}`;
+  }
+  return `تسجيل جديد — ${shortTitle(level)} (Level ${level.level}) — ${cohortLabel}`;
 }

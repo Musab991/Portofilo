@@ -23,7 +23,7 @@ export function CohortBanner({ level, cohort, showLevel = false, headingId }: Pr
           {level ? "لسا ما في موعد أو سعر معلن لهاد المستوى. " : ""}
           تواصل معنا على التلغرام وبنبلّغك أول ما يفتح التسجيل.
         </p>
-        <CohortCta cohort={null} telegramUrl={level?.telegramUrl} />
+        <CohortCta level={level} cohort={null} telegramUrl={level?.telegramUrl} />
       </section>
     );
   }
@@ -97,7 +97,7 @@ export function CohortBanner({ level, cohort, showLevel = false, headingId }: Pr
         </p>
       )}
 
-      <CohortCta cohort={cohort} telegramUrl={level.telegramUrl} />
+      <CohortCta level={level} cohort={cohort} telegramUrl={level.telegramUrl} />
     </section>
   );
 }

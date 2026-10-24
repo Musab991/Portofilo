@@ -16,7 +16,7 @@ Goal: fill each cohort with students who will actually do the work, without prom
 8. **Respect group rules.** Ask admins before posting where required; don't spam the same group daily.
 9. **Results posts need consent.** Student projects/names/screenshots only with permission.
 
-Contact in posts: use the Telegram link (`https://t.me/musabatieh`), not the phone number.
+CTA in posts: the site register page **`musabatieh.com/workshops/register/`** (on-site form → owner gets an email → owner replies by email with the Teams link). Telegram (`https://t.me/musabatieh`) is for **questions only**, never "register on Telegram"; students join the cohort's Telegram group only after the 2 free sessions, once they continue/pay. Never post the phone number.
 
 Pre-post checklist: ☐ no scarcity claim (no seat cap) ☐ date marked tentative if not final ☐ effort stated ☐ no guarantee ☐ no invented stat ☐ correct contact + link.
 
@@ -53,7 +53,7 @@ Core message: **"استثمر بحالك — ابنِ المشروع بإيدك 
 Primary (already used): university Telegram/WhatsApp/Facebook groups. Add:
 - **Your own Telegram channel** (e.g. "ورشات م. مصعب عطية") — one place for announcements so groups can point to it. `TODO (owner)`: create or not.
 - **LinkedIn** (English or Arabic): short post per cohort + project showcases (with consent).
-- **Website** `/workshops/` as the single link in every post.
+- **Website** `/workshops/register/` as the single registration link in every post (`/workshops/` for "read more").
 - **Word of mouth:** ask alumni to share only if they want; no paid referrals unless disclosed.
 
 Cadence per cohort (example, adjust to the real dates):
@@ -69,7 +69,7 @@ Cadence per cohort (example, adjust to the real dates):
 | After cohort | Results/showcase (Template E) | Channel, LinkedIn |
 | After cohort | Level 2 teaser (Template D) | Alumni + channel |
 
-Don't post the same text in the same group more than once a week. Track source with links like `musabatieh.com/workshops/?src=tg-uni-name` and the "كيف سمعت عنا" field.
+Don't post the same text in the same group more than once a week. Track source with links like `musabatieh.com/workshops/register/?src=tg-uni-name` (the form has no "how did you hear" field, so ask in your reply email if you want to know).
 
 ---
 
@@ -95,8 +95,8 @@ Replace `[...]`. Delete any line whose fact you don't have yet — don't guess.
 
 📝 مهم تعرف: في واجب بعد كل لقاء وبتسلّمه بداية اللقاء الجاي. اللي بيشتغل بيطلع بنتيجة، واللي بده يسمع بس، هاد المخيم مش إله.
 
-✍️ للتسجيل ابعث إيميلك من هون: musabatieh.com/workshops/
-📲 استفسار على التلغرام: https://t.me/musabatieh
+✍️ سجّل من هون (دقيقة وحدة): musabatieh.com/workshops/register/
+📲 عندك سؤال؟ التلغرام: https://t.me/musabatieh
 ```
 <!-- No "المقاعد محدودة": this cohort has no seat cap. -->
 
@@ -116,8 +116,8 @@ Optional honest closing line instead of scarcity: `سجّل الآن وابدأ 
 
 💰 أول لقاءين تجربة بدون دفع. إذا كمّلت، بتدفع 150 دينار عن طريق CliQ بعد اللقاء الثاني.
 
-التسجيل (بإيميلك): musabatieh.com/workshops/
-📲 https://t.me/musabatieh
+✍️ التسجيل: musabatieh.com/workshops/register/
+📲 أسئلة: https://t.me/musabatieh
 ```
 
 ### C. Registration closes on <date> — use ONLY if a real closing date exists
@@ -128,8 +128,8 @@ Use this only when the cohort has a real `registrationDeadline` that you will ac
 📢 تذكير: التسجيل بدفعة [الاسم] بيسكّر يوم [التاريخ الحقيقي].
 بعد هاد التاريخ ما رح نستقبل تسجيلات لهاي الدفعة، والدفعة الجاية بتنعلن لاحقاً.
 
-إذا ناوي، سجّل بإيميلك: musabatieh.com/workshops/
-📲 https://t.me/musabatieh
+إذا ناوي، سجّل من هون: musabatieh.com/workshops/register/
+📲 أسئلة: https://t.me/musabatieh
 ```
 After the date (only if you really closed it):
 ```
@@ -211,7 +211,7 @@ Rule: if only some students finished, say so or just show those who agreed. Neve
 البداية الاثنين 21 كانون الأول 2026 (أول لقاء) والنهاية الأربعاء 27 كانون الثاني 2027، لقاءين بالأسبوع (الاثنين والأربعاء)، 3 ساعات كل لقاء، 7:00 – 10:00 مساءً بتوقيت الأردن. الأيام ممكن تتغير حسب الجروب، وبنبلّغكم قبلها بوقت كافي.
 
 **كيف بسجّل؟**
-بتبعث إيميلك من نموذج التسجيل على musabatieh.com/workshops/ (الاسم والتلفون والجامعة اختياريين). بنتواصل معك لتأكيد التسجيل.
+بتعبّي نموذج التسجيل على musabatieh.com/workshops/register/ (الاسم، الإيميل، العمر، وضعك الحالي، والهدف من المشروع). بنرد عليك على الإيميل برابط Teams قبل البداية. أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع عن طريق CliQ وبنضيفك لجروب التلغرام الخاص بالدفعة. التلغرام للأسئلة بس، مش للتسجيل.
 
 **في عدد محدد للمقاعد؟**
 لا، ما في عدد ثابت لهاي الدفعة.
@@ -241,4 +241,4 @@ CliQ بس. تفاصيل الـ CliQ بتوصلك خاص بعد اللقاء ال
 
 ## 7. What to measure (simple)
 
-Per cohort, in the registration Sheet: applicants by source, accepted, paid, started, finished project, deployed, gave feedback. Use these real numbers later — and only these — in results posts.
+Per cohort, in your own tracking sheet (filled from the registration emails): applicants by source, accepted, paid, started, finished project, deployed, gave feedback. Use these real numbers later — and only these — in results posts.

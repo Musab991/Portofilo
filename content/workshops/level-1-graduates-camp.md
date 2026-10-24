@@ -31,7 +31,7 @@ refundPolicy: "أول لقاءين تجربة بدون دفع؛ إذا كمّل�
 cohorts:
   - id: "2026-12"
     name: "دفعة كانون الأول 2026"
-    status: coming-soon          # TODO (owner): switch to "open" once registrationUrl (Google Form) is ready
+    status: open                 # on-site registration form is ready (/workshops/level-1-graduates-camp/register/)
     startDate: "2026-12-21"      # owner decision: Monday, first session. Confirmed.
     # Sessions: Dec 21, 23, 28, 30, Jan 4, 6, 11, 13, 18, 20, 25, 27 (ends Wed 27 Jan 2027).
     # No sessions skipped over the holidays (owner decision; 25 Dec and 1 Jan are Fridays anyway).
@@ -47,8 +47,8 @@ cohorts:
     earlyBird: null
     mode: online
     location: "Microsoft Teams"  # owner decision
-    registrationUrl: null        # TODO (owner): Google Form link (Google Forms approved; email = main required field)
-    registrationEmail: "musabatieh48@gmail.com"   # owner decision: Google Form owner + notification inbox
+    registrationUrl: null        # optional external form; not used — registration is the on-site form below
+    registrationEmail: "musabatieh48@gmail.com"   # owner decision: the on-site form (FormSubmit) emails registrations here. The ONLY place this inbox is set.
     waitlistUrl: null
     paymentMethods: ["CliQ"]     # owner decision. The CliQ alias is sent privately to the student — never put it in this repo.
     registrationDeadline: null   # only set if there is a real closing date
@@ -161,9 +161,20 @@ cohorts:
 
 ## ✍️ كيف بسجّل؟
 
-ابعث إيميلك عن طريق نموذج التسجيل (الإيميل هو الأساس، والاسم ورقم التلفون والجامعة اختياريين بس بيساعدونا). بنتواصل معك لتأكيد التسجيل. الدفع بيكون بعد اللقاء الثاني بس، إذا قررت تكمّل.
+1. عبّي [نموذج التسجيل](register/) هون على الموقع (اسمك، إيميلك، عمرك، وضعك الحالي، والهدف من المشروع). بياخد دقيقة.
+2. قبل بداية المخيم بنتواصل معك **على الإيميل** وبنبعتلك رابط Teams.
+3. بتحضر **أول لقاءين تجربة بدون دفع**.
+4. إذا قررت تكمّل: بتدفع 150 دينار عن طريق **CliQ** بعد اللقاء الثاني، وبنضيفك لجروب التلغرام الخاص بالدفعة.
+
+عندك سؤال قبل ما تسجّل؟ [راسلنا على التلغرام](https://t.me/musabatieh).
 
 ## ❓ أسئلة شائعة
+
+**كيف بسجّل وشو بصير بعدها؟**
+بتعبّي [نموذج التسجيل](register/) على الموقع، وبنرد عليك على الإيميل برابط Teams قبل البداية. بتحضر أول لقاءين تجربة بدون دفع، وإذا كمّلت بتدفع عن طريق CliQ وبنضيفك لجروب التلغرام الخاص بالدفعة.
+
+**إمتى بنضاف لجروب التلغرام؟**
+بعد اللقاء الثاني، لما تقرر تكمّل وتدفع. قبل هيك التواصل بيكون على الإيميل، والتلغرام للأسئلة بس.
 
 **لازم يكون عندي خبرة قبل؟**
 لازم تعرف أساسيات البرمجة بأي لغة. ما بنبدأ من "شو يعني متغير".
@@ -215,6 +226,6 @@ cohorts:
 
 ---
 
-📲 **للتسجيل والاستفسار على التلغرام:** [تواصل معنا على التلغرام](https://t.me/musabatieh)
+✍️ **[سجّل الآن](register/)** وابدأ تبني مشروعك بإيدك.
 
-سجّل الآن وابدأ تبني مشروعك بإيدك
+📲 عندك سؤال؟ [راسلنا على التلغرام](https://t.me/musabatieh)

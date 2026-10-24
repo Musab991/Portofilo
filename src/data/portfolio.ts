@@ -1,9 +1,9 @@
 export const site = {
   name: "Musab Atieh",
   brand: "Musab Atieh",
-  title: "ASP.NET Core & SQL Backend Developer",
+  title: "Full Stack .NET Developer",
   tagline:
-    "I design database schemas, write complex stored procedures, and build APIs for data-heavy systems — AVL tracking, notifications, and high-throughput backends.",
+    "I build web dashboards, mobile app backends and desktop systems with C#, ASP.NET MVC, EF Core and SQL Server — with a focus on database design, performance tuning and real-time AVL tracking.",
   location: "Amman, Jordan",
   email: "atiehmusab@gmail.com",
   telegram: "https://t.me/musabatieh",
@@ -40,47 +40,61 @@ export const profileLinks = [
 export const about = {
   headline: "About",
   body: [
-    "I'm a full-stack developer focused on ASP.NET Core backends and SQL Server, with about 2.5 years of experience building APIs, schemas, and stored procedures for systems that move a lot of data.",
-    "My niche is data-heavy work: designing schemas the right way, optimizing queries and writes with Entity Framework and ADO.NET, and keeping live pipelines (tracking, notifications, Kafka consumers, webhooks) fast and reliable.",
-    "I work with clear design patterns, Domain-Driven Design (DDD) when the domain needs it, SignalR for live updates, and unit tests so changes stay safe. Based in Amman, Jordan — shipping on .NET 8/9/10 with Azure, Docker, and IIS.",
+    "I'm a Full Stack .NET Developer with 2+ years of experience building web dashboards, mobile app backends and desktop systems with C#, ASP.NET MVC, EF Core and SQL Server.",
+    "I built two production mobile backends from scratch and contributed to a large-scale real-time AVL vehicle tracking platform with GIS mapping (Leaflet.js, GeoJSON). I'm strong in database design and performance tuning: stored procedures, indexing, SQL Jobs and EF Core query optimization for large datasets.",
+    "I apply Domain-Driven Design, the Specification Pattern and clean architecture to keep systems scalable and testable. Based in Amman, Jordan — currently deepening my full stack ASP.NET, RESTful API and clean code skills through a 7-month training program.",
   ],
 };
 
+/** Skill groups, taken from the CV's "Technical Skills" section. */
 export const skills = {
   headline: "Skills",
   groups: [
     {
       label: "Backend",
-      items: [
-        "ASP.NET Core (.NET 8 / 9 / 10)",
-        "C#",
-        "REST APIs & webhooks",
-        "SignalR",
-        "Entity Framework + ADO.NET",
-        "Windows Forms",
-      ],
+      items: ["C#", ".NET", "ASP.NET MVC", "RESTful APIs", "EF Core", "ADO.NET", "LINQ"],
     },
     {
-      label: "Database & data",
+      label: "Frontend",
+      items: ["Razor", "JavaScript", "HTML5", "CSS3", "Leaflet.js"],
+    },
+    {
+      label: "Database",
       items: [
         "SQL Server",
-        "Schema design",
+        "T-SQL",
         "Stored procedures",
-        "Query & write optimization",
-        "Large / high-volume datasets",
-        "Kafka + consumers",
+        "Views",
+        "SQL Agent Jobs",
+        "Indexing",
+        "Query optimization",
       ],
     },
     {
-      label: "Architecture & delivery",
+      label: "Architecture & patterns",
       items: [
-        "Design patterns",
-        "Domain-Driven Design (DDD)",
-        "Unit testing",
-        "Azure / Docker / IIS",
-        "AVL tracking & notifications",
-        "Mobile app backends",
+        "Domain-Driven Design",
+        "Specification Pattern",
+        "Repository/Service layers",
+        "Clean architecture",
       ],
+    },
+    {
+      label: "GIS & mapping",
+      items: [
+        "Leaflet.js",
+        "GeoJSON",
+        "Dynamic layers & overlays",
+        "Real-time tracking (AVL)",
+      ],
+    },
+    {
+      label: "Desktop",
+      items: ["Windows Forms"],
+    },
+    {
+      label: "Performance",
+      items: ["N+1 elimination", "Projections", "Compiled queries", "Caching"],
     },
   ],
 };
@@ -195,19 +209,79 @@ export type CvJob = {
   points: string[];
 };
 
+export type CvTraining = Omit<CvJob, "company">;
+
 /**
- * CV page data. Only facts already stated elsewhere on the site are used.
+ * CV page data, taken from the owner's CV ("Full Stack .NET Developer", 3-page PDF).
  * Empty sections are hidden on the page.
  */
 export const cv = {
-  // TODO (owner): add the PDF at public/cv/Musab-Atieh-CV.pdf and set this to "/cv/Musab-Atieh-CV.pdf".
+  // The source PDF lists a phone number, so it is NOT published in public/.
+  // TODO (owner): export a public version of the PDF without the phone number, add it at
+  // public/cv/Musab_Atieh_Full_Stack_NET_Developer_CV.pdf and set this to
+  // "/cv/Musab_Atieh_Full_Stack_NET_Developer_CV.pdf".
   // While null, the "Download CV" button opens the browser's print dialog (Save as PDF).
   pdf: null as string | null,
-  summary: about.body,
-  // TODO (owner): add jobs — title, company, location, start/end dates, 2–4 points each.
-  experience: [] as CvJob[],
-  // TODO (owner): add education — degree, university, graduation year.
+  summary: [
+    "Full Stack .NET Developer with 2+ years of experience building web dashboards, mobile app backends and desktop systems with C#, ASP.NET MVC, EF Core and SQL Server. Built two production mobile backends from scratch and contributed to a large-scale real-time AVL vehicle tracking platform with GIS mapping (Leaflet.js, GeoJSON).",
+    "Strong in database design and performance tuning: stored procedures, indexing, SQL Jobs and EF Core query optimization for large datasets. Applies Domain-Driven Design, the Specification Pattern and clean architecture to keep systems scalable and testable. Currently deepening skills in full stack ASP.NET, RESTful APIs and clean code through a 7-month training program.",
+  ],
+  experience: [
+    {
+      title: "Full Stack .NET Developer",
+      company: "Coderz Company",
+      location: "Amman, Jordan",
+      start: "Nov 2024",
+      end: "Present",
+      points: [
+        "Architected and built two mobile application backends from scratch, covering API design, database modeling and integration with the mobile teams.",
+        "Developed a web dashboard with ASP.NET MVC, Razor and EF Core for business operations and analytics.",
+        "Contributed to a large-scale AVL (Automatic Vehicle Location) tracking system, delivering real-time tracking features and map-based workflows with a cross-functional team.",
+        "Built GIS features end to end: Leaflet.js rendering, dynamic layers and overlays, tooltips and zoom control on the frontend; GeoJSON processing and overlay management on the backend.",
+        "Improved performance on large datasets by eliminating N+1 queries and adding indexing, projections, compiled queries and caching.",
+        "Wrote SQL Jobs, stored procedures and scripts to calculate KPIs such as process completion percentage and operational performance metrics.",
+        "Structured backend systems with Domain-Driven Design and the Specification Pattern for reusable, testable data access.",
+        "Created an internal backend framework that standardized error handling, response wrappers, service-layer patterns and common EF Core logic across projects.",
+        "Diagnosed and refactored performance bottlenecks and production issues, improving system reliability.",
+      ],
+    },
+    {
+      title: ".NET Developer",
+      company: "Aadel",
+      location: "Amman, Jordan",
+      start: "Feb 2024",
+      end: "Sep 2024",
+      points: [
+        "Ran client meetings to gather business requirements and turned them into detailed Product Requirement Documents (PRDs).",
+        "Designed complete technical solutions, including system workflows, architecture and development plans.",
+        "Designed relational database schemas in SQL Server for performance and data integrity.",
+        "Built Windows Forms applications with C#, SQL Server and ADO.NET for data access and business logic.",
+        "Wrote and optimized stored procedures, views and queries to speed up data processing.",
+        "Worked with stakeholders across the lifecycle to refine specifications and deliver on business goals.",
+      ],
+    },
+  ] as CvJob[],
+  training: [
+    {
+      title: "Full Stack ASP.NET Training",
+      location: "Amman, Jordan (On-site)",
+      start: "Mar 2026",
+      end: "Present (7 months)",
+      points: [
+        "Studied C#, OOP, ASP.NET, ADO.NET, RESTful API development, database design, HTML, CSS and JavaScript.",
+        "Built a full stack e-commerce application with ASP.NET Core and JWT authentication.",
+        "Practiced debugging, clean code, SOLID principles and professional soft skills.",
+      ],
+    },
+  ] as CvTraining[],
+  competencies: [
+    "Requirements gathering",
+    "Client communication",
+    "Performance tuning",
+    "Debugging and problem solving",
+    "Team collaboration",
+  ],
+  // TODO (owner): the CV has no education section — add degree, university and year if wanted.
   education: [] as { degree: string; school: string; year: string }[],
-  // TODO (owner): add spoken languages, e.g. "Arabic — native", "English — <level>".
-  languages: [] as string[],
+  languages: ["Arabic (native)", "English"],
 };

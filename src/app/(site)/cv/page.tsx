@@ -55,6 +55,18 @@ export default function CvPage() {
           ))}
         </section>
 
+        <section className={styles.section}>
+          <h2>Technical skills</h2>
+          <dl className={styles.skills}>
+            {skills.groups.map((group) => (
+              <div key={group.label}>
+                <dt>{group.label}</dt>
+                <dd>{group.items.join(" · ")}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
         {cv.experience.length > 0 && (
           <section className={styles.section}>
             <h2>Experience</h2>
@@ -77,6 +89,26 @@ export default function CvPage() {
           </section>
         )}
 
+        {cv.training.length > 0 && (
+          <section className={styles.section}>
+            <h2>Training</h2>
+            {cv.training.map((item) => (
+              <div key={`${item.title}-${item.start}`} className={styles.entry}>
+                <h3>{item.title}</h3>
+                <p className={styles.meta}>
+                  {item.start} – {item.end}
+                  {item.location ? ` · ${item.location}` : ""}
+                </p>
+                <ul>
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+        )}
+
         <section className={styles.section}>
           <h2>Selected projects</h2>
           {projects.map((project) => (
@@ -91,17 +123,12 @@ export default function CvPage() {
           ))}
         </section>
 
-        <section className={styles.section}>
-          <h2>Skills</h2>
-          <dl className={styles.skills}>
-            {skills.groups.map((group) => (
-              <div key={group.label}>
-                <dt>{group.label}</dt>
-                <dd>{group.items.join(" · ")}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+        {cv.competencies.length > 0 && (
+          <section className={styles.section}>
+            <h2>Competencies</h2>
+            <p>{cv.competencies.join(" · ")}</p>
+          </section>
+        )}
 
         {cv.education.length > 0 && (
           <section className={styles.section}>

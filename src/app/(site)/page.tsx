@@ -29,7 +29,7 @@ export default function Home() {
         {/* eslint-disable-next-line @next/next/no-img-element -- static export, images are unoptimized */}
         <img
           src={asset(site.photo)}
-          alt={`${site.name}, ASP.NET Core & SQL backend developer`}
+          alt={`${site.name}, ${site.title}`}
           className={styles.photo}
           width={220}
           height={220}

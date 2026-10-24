@@ -1,7 +1,5 @@
 # Adding or updating a workshop
 
-> Applies once Phase 2 of `docs/PLAN.md` is built. Until then these files are content only.
-
 All workshop content lives in `content/workshops/`:
 
 | File | What it is |
@@ -34,7 +32,8 @@ Every push to `main` rebuilds the site (GitHub Actions → `gh-pages`). It's liv
      currency: "JOD"
      mode: online
      location: "Microsoft Teams"
-     registrationUrl: "https://forms.gle/..."
+     registrationEmail: "musabatieh48@gmail.com"   # on-site form sends registrations here
+     registrationUrl: null                          # only for an external form (not used now)
      notes: "أيام اللقاءات ممكن تتغير حسب الجروب، وبنبلّغكم قبلها بوقت كافي."
    ```
    Set `startDate` to the date of the **first session** (e.g. a Monday if sessions are Mon/Wed). Tip: check university exam periods before picking dates.
@@ -51,21 +50,31 @@ You can edit directly on github.com too: open the file → pencil icon → edit 
 
 ## B. Open / close / mark full
 
+Registration is the **on-site form** (no Google Form). A cohort shows the "سجّل الآن" button when `status: open` **and** it has a `registrationEmail`. The button goes to `/workshops/<slug>/register/` (short link for posts: `/workshops/register/`). Each submission arrives by email (FormSubmit) with a subject like:
+
+`تسجيل جديد — مخيم تجهيز الخريجين (Level 1) — دفعة 21 ديسمبر 2026 — <الاسم>`
+
+Hit **Reply** to answer the student directly (reply-to = their email). Send the Teams link by email before the start; add them to the cohort's Telegram group only after session 2, once they continue and pay via CliQ.
+
 Change only the cohort's `status`:
 
 | Status | When | Site shows |
 | --- | --- | --- |
-| `coming-soon` | Date planned, registration not open yet | "قريباً" + waitlist button (if `waitlistUrl`) |
-| `open` | Form ready, price known, you accept students | "التسجيل مفتوح" + Register button |
-| `full` | Seats really filled | "المقاعد اكتملت" + waitlist button |
-| `closed` | Cohort finished or cancelled | Hidden from the banner |
+| `coming-soon` | Date planned, registration not open yet | "التسجيل قريباً" + waitlist button (if `waitlistUrl`). Register page says "التسجيل مش مفتوح حالياً" |
+| `open` | Price known, you accept students | "التسجيل مفتوح" + "سجّل الآن" button → on-site form |
+| `full` | Seats really filled | "المقاعد اكتملت" + waitlist button. Form hidden |
+| `closed` | Cohort finished or cancelled | Hidden from the banner. Form hidden |
+
+**To open registration:** set `status: open` and make sure `registrationEmail` is set. Push. After the deploy, open the register page once and check the cohort/date shown.
 
 **To close registration:**
 1. Set `status: full` (seats filled) or `closed` (stop entirely). Push.
-2. In Google Forms → **Responses** → turn off **Accepting responses** (and set a closed message, e.g. "التسجيل مسكّر لهاي الدفعة — تابعنا للدفعة الجاية"). The form link may still be shared in old posts, so this step matters.
+2. That's it: the form disappears from the site after the deploy (old links to the register page show "التسجيل مش مفتوح حالياً" + Telegram). Nothing to switch off elsewhere.
 3. Optional: post a short "closed" message in the groups (template in `MARKETING.md`).
 
 After the cohort ends: set `status: closed`. Keep the block (history) or delete it.
+
+**First time only (FormSubmit activation):** the very first submission to a new address triggers a FormSubmit email "Activate Form" to `registrationEmail` and that first submission is **not** delivered. Submit one test registration yourself, click **Activate** in the email (check Spam), then submit again to confirm it arrives. Optional afterwards: FormSubmit's confirmation email gives a random alias (a long string of letters/numbers); put that alias in `registrationEmail` instead of the address to keep the address out of the page source. Registrations still arrive at the same inbox.
 
 ## C. Add a new level
 
@@ -85,7 +94,7 @@ To hide a level: `status: archived`.
 - [ ] `seats` is `null` (no cap) or the real cap. `seatsLeft` only if you'll keep updating it honestly — otherwise `null`. No "limited seats" text when there's no cap.
 - [ ] `price` + `refundPolicy` are set before status `open` (Level 1: first 2 sessions are a free trial, pay 150 JOD via CliQ after session 2, no refund after payment).
 - [ ] Contact uses `telegramUrl`, not a phone number.
-- [ ] `registrationUrl` works in a private/incognito window and the form is accepting responses.
+- [ ] `status: open` only with `registrationEmail` set, and FormSubmit is activated for that address (one-time, see B).
 - [ ] No bank account / CliQ alias anywhere in the repo (it is public). Send payment details privately.
 - [ ] No "TODO" text left in the body of a non-draft level.
 - [ ] Dates use `YYYY-MM-DD` with quotes, e.g. `"2027-07-01"`.

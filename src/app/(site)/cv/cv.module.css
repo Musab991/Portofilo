@@ -74,6 +74,14 @@
   color: var(--text-muted);
 }
 
+.entry ul {
+  margin-top: var(--space-2);
+}
+
+.entry li + li {
+  margin-top: var(--space-1);
+}
+
 .skills {
   display: grid;
   gap: var(--space-2);
@@ -107,12 +115,28 @@
     padding-top: 6pt;
   }
 
-  .entry {
+  /* Long job entries may split across pages; keep each bullet and heading whole. */
+  .entry li,
+  .skills > div {
     break-inside: avoid;
   }
 
-  .section h2 {
+  .section h2,
+  .entry h3,
+  .entry .meta {
     break-after: avoid;
+  }
+
+  .entry ul {
+    margin-top: 3pt;
+  }
+
+  .entry li + li {
+    margin-top: 1pt;
+  }
+
+  .entry + .entry {
+    margin-top: 8pt;
   }
 
   .role,

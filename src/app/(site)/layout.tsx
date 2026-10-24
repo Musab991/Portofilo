@@ -8,15 +8,15 @@ import "../globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Musab Atieh — ASP.NET Core & SQL Backend Developer",
+    default: "Musab Atieh — Full Stack .NET Developer",
     template: "%s — Musab Atieh",
   },
   description:
-    "ASP.NET Core (.NET 8/9/10) developer in Amman. SQL schemas, stored procedures, EF & ADO.NET, Kafka — including AVL tracking for ~50,000 vehicles.",
+    "Full Stack .NET developer in Amman: C#, ASP.NET MVC, EF Core and SQL Server — mobile app backends, web dashboards, real-time AVL tracking and SQL performance tuning.",
   openGraph: {
-    title: "Musab Atieh — ASP.NET Core & SQL Backend Developer",
+    title: "Musab Atieh — Full Stack .NET Developer",
     description:
-      "Hire for ASP.NET Core APIs, SQL Server optimization, live AVL pipelines, and complex CRUD systems. From $20/hr.",
+      "Hire for .NET backends and APIs, SQL Server optimization, real-time AVL tracking and GIS, and complex CRUD systems. From $20/hr.",
     type: "website",
   },
 };

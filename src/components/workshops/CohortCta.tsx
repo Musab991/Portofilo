@@ -1,25 +1,31 @@
-import type { Cohort } from "@/lib/workshops";
+import Link from "next/link";
+import { type Cohort, type Level, registrationLink } from "@/lib/workshops";
 import { site } from "@/data/portfolio";
 
-type Props = { cohort: Cohort | null; telegramUrl?: string };
+type Props = { level: Level | null; cohort: Cohort | null; telegramUrl?: string };
 
 /**
  * Register / waitlist / Telegram buttons, decided only from real data:
- * a button is shown only when its link exists.
+ * "سجّل الآن" goes to the on-site form (or an external form if one is set),
+ * and a button is shown only when its target exists.
  */
-export function CohortCta({ cohort, telegramUrl = site.telegram }: Props) {
-  const register =
-    cohort?.status === "open" && cohort.registrationUrl ? cohort.registrationUrl : null;
+export function CohortCta({ level, cohort, telegramUrl = site.telegram }: Props) {
+  const register = level ? registrationLink(level, cohort) : null;
   const waitlist =
     cohort && cohort.status !== "open" && cohort.waitlistUrl ? cohort.waitlistUrl : null;
 
   return (
     <div className="btn-row">
-      {register && (
-        <a className="btn btn-primary" href={register} target="_blank" rel="noopener noreferrer">
-          سجّل هلأ
-        </a>
-      )}
+      {register &&
+        (register.external ? (
+          <a className="btn btn-primary" href={register.href} target="_blank" rel="noopener noreferrer">
+            سجّل الآن
+          </a>
+        ) : (
+          <Link className="btn btn-primary" href={register.href}>
+            سجّل الآن
+          </Link>
+        ))}
       {waitlist && (
         <a className="btn btn-primary" href={waitlist} target="_blank" rel="noopener noreferrer">
           {cohort?.status === "full" ? "سجّل اهتمامك للدفعة الجاية" : "بلّغني لما يفتح التسجيل"}
@@ -31,7 +37,7 @@ export function CohortCta({ cohort, telegramUrl = site.telegram }: Props) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {register ? "استفسر على تلغرام" : "تواصل على تلغرام"}
+        {register ? "عندك سؤال؟ راسلنا على تلغرام" : "تواصل على تلغرام"}
       </a>
     </div>
   );

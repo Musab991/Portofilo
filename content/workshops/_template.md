@@ -44,8 +44,8 @@ cohorts: []                    # no cohort yet. To add one, replace [] with a li
 #     earlyBird: null                     # e.g. { price: 80, until: "2027-06-15" } — only if real
 #     mode: null                          # online | in-person | hybrid
 #     location: null                      # platform (e.g. "Microsoft Teams") or city/venue
-#     registrationUrl: null               # Google Form link (email = main required field)
-#     registrationEmail: "musabatieh48@gmail.com"   # Google Form owner + notification inbox
+#     registrationEmail: "musabatieh48@gmail.com"   # inbox for the on-site register form (FormSubmit). With status "open" → "سجّل الآن" button → /workshops/<slug>/register/
+#     registrationUrl: null               # optional external form instead (only used when registrationEmail is null)
 #     waitlistUrl: null                   # "notify me" form link
 #     paymentUrl: null                    # optional, future only (e.g. PayPal) — not used for Level 1
 #     paymentMethods: ["CliQ"]            # current policy: CliQ only. NEVER put the CliQ alias/account here — send it privately

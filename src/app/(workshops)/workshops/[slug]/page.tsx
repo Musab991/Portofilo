@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CohortBanner } from "@/components/workshops/CohortBanner";
 import { LEVEL_LABEL, formatDuration } from "@/components/workshops/format";
-import { getLevel, getLevels, visibleCohorts } from "@/lib/workshops";
+import { getLevel, getLevels, registrationLink, visibleCohorts } from "@/lib/workshops";
 import styles from "./level.module.css";
 
 export const dynamicParams = false;
@@ -33,8 +33,7 @@ export default async function LevelPage({ params }: Props) {
   const cohort = visibleCohorts(level)[0] ?? null;
   const label = LEVEL_LABEL[level.status];
   const duration = formatDuration(level, cohort ?? undefined);
-  const register =
-    cohort?.status === "open" && cohort.registrationUrl ? cohort.registrationUrl : null;
+  const register = registrationLink(level, cohort);
 
   return (
     <div className={styles.page}>
@@ -118,9 +117,15 @@ export default async function LevelPage({ params }: Props) {
       {/* Sticky call to action on phones. */}
       <div className={`no-print ${styles.stickyCta}`}>
         {register ? (
-          <a className="btn btn-primary" href={register} target="_blank" rel="noopener noreferrer">
-            سجّل هلأ
-          </a>
+          register.external ? (
+            <a className="btn btn-primary" href={register.href} target="_blank" rel="noopener noreferrer">
+              سجّل الآن
+            </a>
+          ) : (
+            <Link className="btn btn-primary" href={register.href}>
+              سجّل الآن
+            </Link>
+          )
         ) : (
           <span className={styles.stickyNote}>
             {cohort?.status === "full" ? "المقاعد اكتملت" : "التسجيل قريباً"}
@@ -132,7 +137,7 @@ export default async function LevelPage({ params }: Props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          استفسر على تلغرام
+          {register ? "عندك سؤال؟" : "استفسر على تلغرام"}
         </a>
       </div>
     </div>

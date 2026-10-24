@@ -58,7 +58,8 @@ All routes are statically generated. `trailingSlash: true` → URLs end in `/`.
 | `/contact/` | EN | Existing FormSubmit form + Telegram/email |
 | `/workshops/` | **AR (RTL)** | Hero message, next-cohort banner, roadmap, level cards, how follow-up works, FAQ |
 | `/workshops/[slug]/` | AR (RTL) | One level: outline, who it's for/not for, requirements, cohorts, register/pay buttons, FAQ |
-| `/workshops/register/` | AR (RTL) | Simple page: steps + button to the registration form (or embedded form) + payment info |
+| `/workshops/register/` | AR (RTL) | Short link for posts: the on-site form of the open level (or a level picker / "closed" note) |
+| `/workshops/[slug]/register/` | AR (RTL) | On-site registration form for that level (FormSubmit → owner's email) + what happens next |
 | `/sitemap.xml`, `/robots.txt` | — | via `src/app/sitemap.ts`, `robots.ts` |
 | `404` | — | `src/app/not-found.tsx` |
 
@@ -108,7 +109,7 @@ Breakpoints: base = 360px phone; `48rem` tablet; `64rem` desktop. Max content wi
 
 **Workshop detail `/workshops/[slug]/`** — Banner for that level's cohorts; markdown body (outline, who it's for/not for, what you'll build, requirements, FAQ); sticky bottom CTA on mobile ("سجّل" / "استفسر على تلغرام"). Draft levels show a clear "مسودة — المحتوى قابل للتغيير" notice and no payment button.
 
-**Register `/workshops/register/`** — 3 steps: (1) send your email via the Google Form, (2) we confirm on Telegram and send the Teams link, (3) attend the first 2 sessions free; if you continue, pay 150 JOD via CliQ after session 2 (alias sent privately). Honest note: "أول لقاءين تجربة بدون دفع؛ ما في استرجاع بعد الدفع".
+**Register `/workshops/[slug]/register/`** (and `/workshops/register/`) — on-site form + steps: (1) fill the form, (2) we reply by email with the Teams link before the start, (3) attend the first 2 sessions free, (4) if you continue, pay 150 JOD via CliQ after session 2 (alias sent privately) and get added to the cohort's Telegram group. Honest note: "أول لقاءين تجربة بدون دفع؛ ما في استرجاع بعد الدفع".
 
 ---
 
@@ -218,8 +219,8 @@ One file = one **level** (curriculum). Each level has a `cohorts` list. Adding "
 | `earlyBird` | object \| null | `{ price, until }` — only if real |
 | `mode` | enum \| null | `online` · `in-person` · `hybrid` |
 | `location` | string \| null | platform (Level 1: Microsoft Teams) or city/venue |
-| `registrationUrl` | string \| null | Google Form link (v1) |
-| `registrationEmail` | string \| null | inbox that receives registrations / owns the Google Form (Level 1: musabatieh48@gmail.com) |
+| `registrationEmail` | string \| null | inbox (or FormSubmit alias) for the on-site form. `open` + set → "سجّل الآن" → `/workshops/<slug>/register/` (Level 1: musabatieh48@gmail.com) |
+| `registrationUrl` | string \| null | optional external form, used only when `registrationEmail` is null |
 | `waitlistUrl` | string \| null | form for "notify me" |
 | `paymentUrl` | string \| null | optional, **future only** (e.g. PayPal, after verifying it works in Jordan). Not used for Level 1 |
 | `paymentMethods` | string[] | Level 1: `["CliQ"]` — shown as text; the CliQ alias is sent privately and **never stored in the repo** |
@@ -247,10 +248,16 @@ One file = one **level** (curriculum). Each level has a `cohorts` list. Adding "
 | Telegram / WhatsApp deep link | Free | 5 min | Zero friction, owner already uses Telegram, immediate conversation | No structured data, easy to lose track, not scalable |
 | Supabase / Cloudflare Worker + DB | Free tiers | 1–3 days | Real backend: auto confirmation email, seat counting, admin view | Must build, secure, and maintain; overkill for v1 |
 
-**Recommendation v1:** **Google Form** linked from `registrationUrl` (button opens in new tab; optional embed on `/workshops/register/`), with the **Telegram link as a secondary "استفسر" button**. Students register **by sending their email** (owner decision): **email = the only required field**, plus consent checkbox (contact + data use). Optional: full name, phone (WhatsApp/Telegram), university, major, year/graduated, chosen level + cohort, self-assessment (C#/SQL/HTML-JS), laptop available?, how did you hear about us. Receiving inbox (owner decision): **musabatieh48@gmail.com** — create the Google Form under this account and enable response notifications there. The portfolio contact form in `src/` keeps atiehmusab@gmail.com (unchanged). Enable "collect email" and response notifications. Owner contacts each applicant manually.
+**Decision (owner, Oct 2026) — replaces the Google Forms plan:** a **native form on the site** (`/workshops/<slug>/register/`, short link `/workshops/register/`) that posts to **FormSubmit** (AJAX, same pattern as `ContactForm.tsx`) and **emails the owner directly** at the cohort's `registrationEmail` (**musabatieh48@gmail.com** — set only in the Level 1 frontmatter). No Google Form, no Sheet.
+- Fields (minimal): الاسم, الإيميل, العمر (15–70), الوضع الحالي (طالب جامعي / خريج / غير ذلك), الهدف من المشروع (مشروع تخرج / مشروع للـ CV والشغل / مشروع للسوق), ملاحظة (optional). Hidden: level slug, cohort id, cohort start date.
+- Subject: `تسجيل جديد — <short level title> (Level N) — دفعة <D> <month> <YYYY> — <الاسم>`, `_template: table`, `_replyto` = student email (owner just hits Reply), honeypot `_honey`, `_captcha: false`, plus a minimum fill time.
+- Flow: form → owner replies **by email** with the Teams link before the start → first 2 sessions free → student who continues pays via **CliQ** after session 2 → owner adds them to the **cohort's Telegram group**. Telegram (`t.me/musabatieh`) is only a secondary "عندك سؤال؟" link, not the registration channel.
+- **FormSubmit one-time activation:** the first submission to a new address is not delivered; FormSubmit emails an "Activate Form" link to that inbox. Owner submits one test registration, clicks Activate (check Spam), then tests again. Afterwards FormSubmit offers a random alias; it can replace the address in `registrationEmail` (the loader accepts an email or an alias) to keep the address out of the page source.
+- Limits: results live in email only (no dashboard); FormSubmit is a free third-party service, so keep the Telegram fallback visible on errors. The portfolio contact form in `src/` keeps its own address (unchanged).
+- `registrationUrl` stays optional in the model for a future external form (used only when `registrationEmail` is empty).
 
 **Upgrade path:**
-1. v1.1 — Native form on the site posting to **Google Apps Script web app → same Sheet** (keeps your design, free), or Tally embed.
+1. v1.1 — If email-only gets messy: post the same form to a **Google Apps Script web app → Sheet**, or Tally.
 2. v2 — Cloudflare Worker or Supabase: confirmation email, automatic `seatsLeft`, waitlist, simple admin page. Only when volume justifies it (e.g. > ~40 applicants per cohort).
 
 ### Payment — honest notes for Jordan
@@ -326,13 +333,13 @@ Acceptance:
 
 ### Phase 3 — Registration & payment
 Tasks:
-- Owner creates Google Form (fields in §7) + linked Sheet + waitlist form; paste URLs into the cohort.
-- `/workshops/register/` page with the 3-step flow and the honest "first 2 sessions free, pay via CliQ after session 2, no refund after payment" note.
+- ~~Owner creates Google Form~~ → replaced by the on-site FormSubmit form (§7). **Done:** `/workshops/<slug>/register/` + `/workshops/register/`, Level 1 cohort `open`. Owner: activate FormSubmit once (§7).
+- Register page with the steps and the honest "first 2 sessions free, pay via CliQ after session 2, no refund after payment" note. **Done.**
 - Payment (CliQ only, after session 2) and the policy are rendered from `paymentMethods` + `refundPolicy`.
 - (Future) PayPal link only after verification.
 - Cohort tracking Sheet template (Students, Attendance, Homework, Milestones, Payments).
 Acceptance:
-- A test submission reaches the Sheet and triggers an email notification.
+- After FormSubmit activation, a test submission arrives at `registrationEmail` with the expected subject and reply-to.
 - Register buttons hide/disable automatically when status is not `open` (show waitlist instead).
 - No bank/CliQ account details published on the public site.
 - Price and the trial/no-refund policy are visible before session 1; no CliQ alias appears anywhere in the repo or site.
@@ -356,7 +363,8 @@ Acceptance:
 | Stale banner (date passed, status still `open`) | Status is manual source of truth; checklist in `ADDING-A-WORKSHOP.md`; optional daily rebuild cron |
 | Build breaks from a typo in frontmatter | Validation with clear errors; owner previews with `npm run build` locally or checks the Actions tab |
 | Student pays then wants a refund | Policy shown before session 1: 2 free trial sessions, payment after session 2, no refund after payment. Owner sends the CliQ alias only after session 2 |
-| Collecting personal data in Google Forms | Consent checkbox; only needed fields; don't share the Sheet; delete data after a set period `TODO (owner)` |
+| Collecting personal data (registration emails via FormSubmit) | Only needed fields (no phone, no university); data sits in the owner's inbox only; delete old registration emails after a set period `TODO (owner)` |
+| FormSubmit not activated / down | Owner activates once with a test submission; the form's error state shows the Telegram link as fallback |
 | RTL/LTR layout bugs | Logical CSS properties; test both directions |
 | Over-promising in marketing | Honesty rules + FAQ; no job guarantees |
 | Owner capacity (reviewing many students alone) — higher now that there is **no seat cap** | Rubric + PR-based reviews; owner sets a private max he can review well; if reached, set status `full` (truthfully) or split into a second group |
@@ -377,12 +385,13 @@ Acceptance:
 - ~~Mode / platform~~ → **online only**, on **Microsoft Teams**.
 - ~~Seat count~~ → **no fixed cap**. All scarcity wording removed; `full` status kept in the model for future cohorts.
 - ~~Payment & refund~~ → **CliQ only**, paid **after session 2**; first 2 sessions are a free trial; **no refund after payment**. CliQ alias sent privately, never in the repo. PayPal = possible future option only.
-- ~~Registration tool~~ → **Google Forms** approved for v1 (form not created yet → `registrationUrl` still TODO, status `coming-soon`).
+- ~~Registration tool~~ → **on-site form via FormSubmit** emailing the owner (replaces Google Forms). Level 1 cohort is `open`.
 - ~~Language of instruction~~ → **Arabic**, technical terms in English.
 - ~~Portfolio contact~~ → phone/WhatsApp removed from the portfolio; Telegram https://t.me/musabatieh shown instead.
 - ~~Certificate~~ → **none**; the project (on GitHub, deployed) is the outcome.
-- ~~Registration data~~ → students register **by sending their email** (email required; other fields optional).
-- ~~Registration email~~ → **musabatieh48@gmail.com** (Google Form owner + notifications). Portfolio contact form email in `src/` unchanged.
+- ~~Registration data~~ → name, email, age, current situation, project goal (required) + optional note. Nothing else.
+- ~~Registration email~~ → **musabatieh48@gmail.com** (`registrationEmail` in the Level 1 frontmatter — the only place it is set). Portfolio contact form email in `src/` unchanged.
+- ~~Telegram role~~ → not a registration channel. Students are added to the cohort's Telegram group after the 2 free sessions, once they continue/pay. Public Telegram link = questions only.
 - ~~Public contact~~ → **https://t.me/musabatieh** (Telegram); the phone number is not published anywhere in the repo.
 - ~~Testimonials~~ → the two in `portfolio.ts` were not real; **removed** (data + section). Testimonials stay empty until real students give written permission.
 - ~~Missed sessions~~ → **live only, no recordings**; the student is responsible for catching up (homework, repo, asking on Telegram).
@@ -391,12 +400,12 @@ Acceptance:
 
 ### Still open
 1. **Installments / early-bird** for the 150 JOD price: yes / no.
-2. **Create the Google Form** (owner: musabatieh48@gmail.com) and paste its link into `registrationUrl`, then set the cohort to `open`.
+2. **Activate FormSubmit** for musabatieh48@gmail.com: submit one test registration on `/workshops/register/`, click "Activate Form" in the email (check Spam), test again. Optionally switch `registrationEmail` to the FormSubmit alias afterwards.
 3. **Level 2**: duration, price, start window, and frontend framework (React / Angular / Blazor / Vue).
 4. **Arabic font** (IBM Plex Sans Arabic / Cairo / Tajawal).
 5. **Dark mode** in v1 or later.
 6. **New dependencies** OK (`gray-matter`, markdown renderer)?
-7. **Data retention**: how long to keep applicant data; who can access the Sheet.
+7. **Data retention**: how long to keep registration emails.
 8. **Homework policy** when a student repeatedly misses homework.
 9. An honest **weekly homework-hours estimate**.
 10. **Private review capacity**: max students you can review well (no public cap, but you may need to split groups).
