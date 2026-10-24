@@ -29,7 +29,7 @@ These stay local only (already in `.gitignore`):
 
 ## Edit content
 
-Change **`src/data/portfolio.ts`** for name, phone, projects, skills, and links.
+Change **`src/data/portfolio.ts`** for name, contact links (Telegram/email), projects, skills, and links.
 
 ## Live site
 

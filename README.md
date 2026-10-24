@@ -24,7 +24,7 @@ Setup guide: [docs/domain-setup.md](docs/domain-setup.md)
 | `public/` | Photos, project screenshots, `CNAME` for custom domain |
 | `src/app/` | Next.js pages |
 | `src/components/` | Header, contact form, UI |
-| `src/data/portfolio.ts` | **Your content** — name, phone, projects, skills |
+| `src/data/portfolio.ts` | **Your content** — name, contact links (Telegram/email), projects, skills |
 | `.github/workflows/` | Auto-deploy to GitHub Pages |
 
 ## Quick start (local)
@@ -38,7 +38,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Edit content
 
-Update `src/data/portfolio.ts` for name, phone, projects, skills, and links.
+Update `src/data/portfolio.ts` for name, contact links (Telegram/email), projects, skills, and links.
 
 ## Stack
 

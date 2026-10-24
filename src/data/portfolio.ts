@@ -6,8 +6,8 @@ export const site = {
     "I design database schemas, write complex stored procedures, and build APIs for data-heavy systems — AVL tracking, notifications, and high-throughput backends.",
   location: "Amman, Jordan",
   email: "atiehmusab@gmail.com",
-  phone: "+962 780 852 828",
-  whatsapp: "https://wa.me/962780852828",
+  telegram: "https://t.me/musabatieh",
+  telegramHandle: "@musabatieh",
   availability: "Open to freelance backend & database projects",
   rate: "$20/hr (typical range $20–35/hr)",
   replyWithin: "12–24 hours",
@@ -156,24 +156,5 @@ export const projects: Project[] = [
       "Built a Windows Forms app with structured modules for lawyers’ daily work: clients, cases, and service workflows, backed by SQL Server and clear domain boundaries so new features could be added without breaking the rest.",
     result:
       "The office moved daily work into the app instead of scattered sheets. Staff could add and follow services for each lawyer faster, with less duplicate data entry and clearer case status across the team.",
-  },
-];
-
-export type Testimonial = {
-  quote: string;
-  name: string;
-  role: string;
-};
-
-export const testimonials: Testimonial[] = [
-  {
-    quote: "الشغل مرتب ويرد بسرعة. فهم المطلوب من أول مرة وسلّم على الوقت.",
-    name: "أحمد",
-    role: "صاحب مشروع — عمّان",
-  },
-  {
-    quote: "ظبطلنا الـ API والداتا صح، والتطبيق اشتغل مرتاح بعد ما خلص.",
-    name: "خالد",
-    role: "مشرف تقني",
   },
 ];

@@ -6,7 +6,6 @@ import {
   projects,
   site,
   skills,
-  testimonials,
 } from "@/data/portfolio";
 import styles from "./page.module.css";
 
@@ -43,8 +42,8 @@ export default function Home() {
               <span>{site.availability}</span>
               <span>{site.location}</span>
               <span>{site.rate}</span>
-              <a className={styles.heroFactLink} href={site.whatsapp} target="_blank" rel="noopener noreferrer">
-                {site.phone}
+              <a className={styles.heroFactLink} href={site.telegram} target="_blank" rel="noopener noreferrer">
+                Telegram {site.telegramHandle}
               </a>
             </div>
           </div>
@@ -98,14 +97,14 @@ export default function Home() {
                   </dd>
                 </div>
                 <div>
-                  <dt>Phone / WhatsApp</dt>
+                  <dt>Telegram</dt>
                   <dd>
                     <a
-                      href={site.whatsapp}
+                      href={site.telegram}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {site.phone}
+                      Telegram {site.telegramHandle}
                     </a>
                   </dd>
                 </div>
@@ -208,40 +207,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section
-          id="testimonials"
-          className={`${styles.section} ${styles.shell}`}
-        >
-          <div data-reveal>
-            <p className={styles.sectionLabel}>04 — Testimonials</p>
-            <h2 className={styles.sectionTitle}>What clients say</h2>
-            <p className={styles.sectionLead}>
-              كلمات بسيطة من ناس اشتغلت معاهم.
-            </p>
-          </div>
-          <div className={styles.testimonialGrid}>
-            {testimonials.map((item, index) => (
-              <figure
-                key={`${item.name}-${index}`}
-                className={`${styles.testimonial} ${styles.testimonialRtl}`}
-                data-reveal={index === 0 ? true : "delay"}
-                lang="ar"
-                dir="rtl"
-              >
-                <blockquote>“{item.quote}”</blockquote>
-                <figcaption>
-                  <strong>{item.name}</strong>
-                  {item.role}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
         <section id="contact" className={`${styles.section} ${styles.shell}`}>
           <div className={styles.contactGrid}>
             <div data-reveal>
-              <p className={styles.sectionLabel}>05 — Contact</p>
+              <p className={styles.sectionLabel}>04 — Contact</p>
               <h2 className={styles.sectionTitle}>Let&apos;s build something</h2>
               <div className={styles.contactPanel}>
                 <p>
@@ -250,11 +219,11 @@ export default function Home() {
                   <a href={`mailto:${site.email}`}>{site.email}</a>
                   {" · "}
                   <a
-                    href={site.whatsapp}
+                    href={site.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    WhatsApp {site.phone}
+                    Telegram {site.telegramHandle}
                   </a>
                   . I usually reply within {site.replyWithin}.
                 </p>
@@ -286,8 +255,8 @@ export default function Home() {
         <p>
           <a href={`mailto:${site.email}`}>{site.email}</a>
           {" · "}
-          <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
-            {site.phone}
+          <a href={site.telegram} target="_blank" rel="noopener noreferrer">
+            Telegram {site.telegramHandle}
           </a>
         </p>
       </footer>

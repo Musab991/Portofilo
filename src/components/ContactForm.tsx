@@ -98,7 +98,7 @@ export function ContactForm() {
     } catch {
       setStatus("error");
       setError(
-        `Could not send. WhatsApp ${site.phone} or email ${site.email}.`
+        `Could not send. Message me on Telegram (${site.telegramHandle}) or email ${site.email}.`
       );
     }
   }
@@ -157,10 +157,8 @@ export function ContactForm() {
           Or email{" "}
           <a href={`mailto:${site.email}`}>{site.email}</a>
           {" · "}
-          <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a>
-          {" · "}
-          <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
-            WhatsApp
+          <a href={site.telegram} target="_blank" rel="noopener noreferrer">
+            Telegram {site.telegramHandle}
           </a>
         </p>
       </div>
