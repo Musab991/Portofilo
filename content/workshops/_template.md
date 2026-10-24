@@ -33,7 +33,7 @@ cohorts: []                    # no cohort yet. To add one, replace [] with a li
 #     name: "دفعة صيف 2027"
 #     status: coming-soon                 # open | full | coming-soon | closed
 #     startDate: "2027-07-01"             # YYYY-MM-DD or null
-#     startDateConfirmed: false           # false = site shows "موعد مبدئي"
+#     startDateConfirmed: false           # false = site adds "(الموعد قابل للتغيير)" after the date
 #     schedule: null                      # e.g. "الأحد والأربعاء 7–9 مساءً"
 #     sessionsPerWeek: null               # overrides the level value if set
 #     durationWeeks: null                 # overrides the level value if set

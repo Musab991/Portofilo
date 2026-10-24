@@ -4,15 +4,19 @@ Upload or push the **project root** — not a parent folder wrapping the project
 
 ```
 Portofilo/                    ← repo root (what GitHub shows)
+├── content/workshops/        ← one .md file per workshop level (Arabic)
 ├── public/                   ← images & static files
 │   ├── musab-atieh.png
 │   └── projects/avl/         ← case study screenshots
 ├── src/
-│   ├── app/                  ← pages + API routes
-│   │   └── api/contact/      ← contact form backend
+│   ├── app/
+│   │   ├── (site)/           ← English pages: /, /projects, /cv, /contact
+│   │   └── (workshops)/      ← Arabic RTL pages: /workshops, /workshops/<slug>
 │   ├── components/           ← React UI
+│   ├── lib/workshops.ts      ← reads content/workshops at build time
+│   ├── styles/tokens.css     ← colors & spacing (design tokens)
 │   └── data/
-│       └── portfolio.ts      ← edit your name, projects, links here
+│       └── portfolio.ts      ← edit your name, projects, links, CV here
 ├── .github/workflows/   ← auto-deploy to GitHub Pages on push
 ├── next.config.ts
 └── README.md
@@ -24,6 +28,7 @@ These stay local only (already in `.gitignore`):
 
 - `node_modules/`
 - `.next/`
+- `out/`
 - `.vercel/`
 - `.env*` (secrets)
 

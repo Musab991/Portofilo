@@ -1,0 +1,86 @@
+.page {
+  padding-bottom: 5rem; /* room for the sticky CTA on phones */
+}
+
+.level {
+  margin-top: var(--space-4);
+}
+
+.title {
+  font-size: var(--text-2xl);
+}
+
+.titleEn {
+  margin-top: var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  /* dir="ltr" text, aligned with the Arabic heading above it. */
+  text-align: right;
+}
+
+.pill {
+  margin-top: var(--space-3);
+}
+
+.notice {
+  margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  background: var(--warning-bg);
+  color: var(--warning);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.cardTitle {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lg);
+}
+
+.list li + li {
+  margin-top: var(--space-2);
+}
+
+.facts {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.facts dt {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.facts dd {
+  font-weight: 600;
+}
+
+.stickyCta {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.stickyNote {
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+@media (min-width: 48rem) {
+  .page {
+    padding-bottom: 0;
+  }
+
+  .stickyCta {
+    display: none;
+  }
+}

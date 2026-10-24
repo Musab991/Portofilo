@@ -18,6 +18,25 @@ export const site = {
   freelancer: "",
 };
 
+export type NavLink = { href: string; label: string; labelAr: string };
+
+/** Top navigation (English labels on the site, Arabic labels on /workshops). */
+export const navLinks: NavLink[] = [
+  { href: "/", label: "Home", labelAr: "الرئيسية" },
+  { href: "/projects/", label: "Projects", labelAr: "المشاريع" },
+  { href: "/cv/", label: "CV", labelAr: "السيرة الذاتية" },
+  { href: "/workshops/", label: "Workshops", labelAr: "الورشات" },
+  { href: "/contact/", label: "Contact", labelAr: "تواصل" },
+];
+
+/** Public profile links that are actually filled in. */
+export const profileLinks = [
+  { href: site.github, label: "GitHub" },
+  { href: site.linkedin, label: "LinkedIn" },
+  { href: site.upwork, label: "Upwork" },
+  { href: site.freelancer, label: "Freelancer" },
+].filter((link) => link.href);
+
 export const about = {
   headline: "About",
   body: [
@@ -77,6 +96,8 @@ export type Project = {
   title: string;
   client: string;
   role: string;
+  /** One line for cards. */
+  summary: string;
   stack: string[];
   problem: string;
   solution: string;
@@ -91,6 +112,8 @@ export const projects: Project[] = [
     title: "AVL live tracking & high-volume data pipeline",
     client: "Government-related client — Saudi Arabia",
     role: "Backend / database developer",
+    summary:
+      "Live tracking pipeline for ~50,000 vehicles sending an AVL signal every 30 seconds.",
     stack: [
       "ASP.NET Core",
       "EF + ADO.NET",
@@ -130,6 +153,8 @@ export const projects: Project[] = [
     title: "Mobile app backends from scratch (×2)",
     client: "Service & field-operations mobile products",
     role: "Backend developer",
+    summary:
+      "Two mobile app backends built from scratch: schemas, REST APIs, and unit-tested core logic.",
     stack: [
       "ASP.NET Core",
       "SQL Server",
@@ -149,6 +174,8 @@ export const projects: Project[] = [
     title: "Law-firm desktop system (Windows Forms)",
     client: "Law firm — Amman / Jordan",
     role: "Full-stack desktop developer",
+    summary:
+      "One desktop system for a law firm's clients, cases, and service workflows.",
     stack: ["Windows Forms", "C#", "SQL Server", "CRUD workflows", "DDD-style modules"],
     problem:
       "The firm ran lawyer work across messy files and manual steps. They needed one desktop system for cases, clients, and services — real multi-screen CRUD, not a simple form demo.",
@@ -158,3 +185,29 @@ export const projects: Project[] = [
       "The office moved daily work into the app instead of scattered sheets. Staff could add and follow services for each lawyer faster, with less duplicate data entry and clearer case status across the team.",
   },
 ];
+
+export type CvJob = {
+  title: string;
+  company: string;
+  location?: string;
+  start: string;
+  end: string;
+  points: string[];
+};
+
+/**
+ * CV page data. Only facts already stated elsewhere on the site are used.
+ * Empty sections are hidden on the page.
+ */
+export const cv = {
+  // TODO (owner): add the PDF at public/cv/Musab-Atieh-CV.pdf and set this to "/cv/Musab-Atieh-CV.pdf".
+  // While null, the "Download CV" button opens the browser's print dialog (Save as PDF).
+  pdf: null as string | null,
+  summary: about.body,
+  // TODO (owner): add jobs — title, company, location, start/end dates, 2–4 points each.
+  experience: [] as CvJob[],
+  // TODO (owner): add education — degree, university, graduation year.
+  education: [] as { degree: string; school: string; year: string }[],
+  // TODO (owner): add spoken languages, e.g. "Arabic — native", "English — <level>".
+  languages: [] as string[],
+};

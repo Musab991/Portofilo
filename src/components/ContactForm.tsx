@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { site } from "@/data/portfolio";
 import styles from "./ContactForm.module.css";
 
@@ -11,10 +11,11 @@ export function ContactForm() {
     "idle"
   );
   const [error, setError] = useState("");
-  const [startedAt, setStartedAt] = useState(0);
+  // Time the form became usable (anti-spam: bots submit instantly).
+  const startedAt = useRef(0);
 
   useEffect(() => {
-    setStartedAt(Date.now());
+    startedAt.current = Date.now();
   }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -40,7 +41,7 @@ export function ContactForm() {
       return;
     }
 
-    if (Date.now() - startedAt < MIN_FILL_MS) {
+    if (Date.now() - startedAt.current < MIN_FILL_MS) {
       setStatus("error");
       setError("Please take a moment and try again.");
       return;
@@ -85,7 +86,7 @@ export function ContactForm() {
         if (/activat|confirm|verify/i.test(msg)) {
           setStatus("error");
           setError(
-            "One-time setup: check atiehmusab@gmail.com (Inbox + Spam) for a FormSubmit activation email, click Confirm, then try again."
+            `One-time setup: check ${site.email} (Inbox + Spam) for a FormSubmit activation email, click Confirm, then try again.`
           );
           return;
         }
@@ -94,7 +95,7 @@ export function ContactForm() {
 
       setStatus("sent");
       form.reset();
-      setStartedAt(Date.now());
+      startedAt.current = Date.now();
     } catch {
       setStatus("error");
       setError(
@@ -148,7 +149,7 @@ export function ContactForm() {
       <div className={styles.actions}>
         <button
           type="submit"
-          className={styles.submit}
+          className={`btn btn-primary ${styles.submit}`}
           disabled={status === "sending"}
         >
           {status === "sending" ? "Sending…" : "Send message"}

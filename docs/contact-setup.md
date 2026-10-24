@@ -1,20 +1,15 @@
 # Contact form email setup
 
-Your form sends to **atiehmusab@gmail.com**. Best option: Gmail App Password on Vercel.
+The site is a static export on GitHub Pages, so there is no server and no API route.
+The form on `/contact/` posts directly from the browser to **FormSubmit**
+(`https://formsubmit.co/ajax/<email>`), which emails **atiehmusab@gmail.com**
+(the `site.email` value in `src/data/portfolio.ts`).
 
-## Gmail App Password (recommended)
+## One-time activation
 
-1. Google Account → **Security** → **2-Step Verification** → **App passwords**
-2. Create password for Mail
-3. In [Vercel → Environment Variables](https://vercel.com/lords5/freelance-portfolio/settings/environment-variables):
+The first submission sends an **activation** email from FormSubmit to that inbox.
+Check Inbox + Spam and click **Confirm** once. After that, messages arrive normally.
 
-| Name | Value |
-| --- | --- |
-| `GMAIL_USER` | `atiehmusab@gmail.com` |
-| `GMAIL_APP_PASSWORD` | your 16-char app password |
+## Changing the receiving email
 
-4. Redeploy and test the contact form
-
-## FormSubmit fallback
-
-First submission may send an **activation** email — check Inbox + Spam, click Confirm once.
+Edit `site.email` in `src/data/portfolio.ts`, push, then repeat the activation step for the new address.

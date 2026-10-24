@@ -1,0 +1,91 @@
+.hero {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+  padding-block: var(--space-12);
+}
+
+.photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent-bg);
+  grid-row: 1;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-6);
+  padding: 0;
+  list-style: none;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.about {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.aboutBody {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  max-width: 44rem;
+}
+
+.details {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.details dt {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.details dd {
+  overflow-wrap: anywhere;
+}
+
+.groupTitle {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-lg);
+}
+
+.more {
+  margin-top: var(--space-6);
+  font-weight: 600;
+}
+
+.workshops {
+  padding: var(--space-8) var(--space-6);
+  background: var(--accent-bg);
+  border-radius: var(--radius-lg);
+}
+
+.workshops p {
+  max-width: 40rem;
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 48rem) {
+  .hero {
+    grid-template-columns: 1fr auto;
+  }
+
+  .photo {
+    width: 220px;
+    height: 220px;
+    grid-row: auto;
+  }
+
+  .about {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}

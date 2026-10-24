@@ -1,0 +1,48 @@
+.hero {
+  padding-block: var(--space-12) var(--space-8);
+}
+
+.cardTitle {
+  margin-bottom: var(--space-2);
+  font-size: var(--text-lg);
+}
+
+.faq {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  max-width: 46rem;
+}
+
+.faqItem {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.faqItem summary {
+  min-height: var(--tap);
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.faqItem p {
+  padding: 0 var(--space-4) var(--space-4);
+  color: var(--text-muted);
+}
+
+.contact {
+  padding: var(--space-8) var(--space-6);
+  background: var(--accent-bg);
+  border-radius: var(--radius-lg);
+}
+
+.contact p {
+  margin-top: var(--space-2);
+}
+
+.plainList {
+  padding: 0;
+  list-style: none;
+}

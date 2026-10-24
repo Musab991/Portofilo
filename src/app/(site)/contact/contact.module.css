@@ -1,0 +1,28 @@
+.layout {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.asideTitle {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lg);
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+}
+
+.list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+  }
+}
