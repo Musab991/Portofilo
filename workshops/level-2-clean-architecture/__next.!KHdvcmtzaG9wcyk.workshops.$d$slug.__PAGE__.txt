@@ -1,0 +1,64 @@
+1:"$Sreact.fragment"
+2:I[22016,["/_next/static/chunks/072nrqj6omvcl.js"],""]
+7:I[97367,["/_next/static/chunks/05-c3ty_6dwfk.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+:HL["/_next/static/chunks/0ocipm2jtylmf.css","style"]
+3:Te49,<blockquote>
+<p>⚠️ <strong>مسودة — المحتوى مقترح وقابل للتغيير.</strong> ما في موعد أو سعر معلن لهاد المستوى لسا. إذا مهتم، تواصل معنا وبنبلّغك أول ما يفتح.</p>
+</blockquote>
+<h2>🎯 شو الفكرة؟</h2>
+<p>بالمستوى 1 كتبت كل شي بإيدك وفهمت الأساس. بالمستوى 2 بتتعلم كيف الشركات بتنظّم المشروع لما يكبر: طبقات واضحة، أدوات بتوفّر وقت، وواجهة مبنية بـ Framework.</p>
+<p>القاعدة نفسها: <strong>انت بتبني، احنا بنراجع.</strong></p>
+<h2>📚 المحتوى المقترح (Proposal — للتأكيد من المحاضر)</h2>
+<h3>🔹 المرحلة 1: من ADO.NET لـ EF Core</h3>
+<ul>
+<li>ليش الـ ORM؟ ومتى ADO.NET لسا أفضل</li>
+<li>DbContext، Entities، Relationships</li>
+<li>Migrations و Seeding</li>
+<li>LINQ وكيف تشوف الـ SQL اللي بيطلع (وتتجنب مشاكل الأداء زي N+1)</li>
+</ul>
+<h3>🔹 المرحلة 2: الهيكلة والـ Patterns</h3>
+<ul>
+<li>Dependency Injection بشكل عملي</li>
+<li>Repository Pattern و Unit of Work: متى بتفيد ومتى بتكون زيادة</li>
+<li>DTOs و Mapping</li>
+<li>تقسيم المشروع لطبقات (API / Application / Domain / Infrastructure) — مقدمة لـ Clean Architecture</li>
+<li>Validation مركزي و Global Error Handling و Logging</li>
+</ul>
+<h3>🔹 المرحلة 3: Frontend Framework</h3>
+<ul>
+<li>اختيار الـ Framework (React / Angular / Blazor / Vue)</li>
+<li>Components، Routing، State</li>
+<li>ربط الواجهة مع الـ API، Authentication (JWT) من جهة الواجهة</li>
+</ul>
+<h3>🔹 المرحلة 4: الجودة والنشر</h3>
+<ul>
+<li>Unit Tests أساسية للـ Services</li>
+<li>إعدادات البيئات (Development / Production)</li>
+<li>نشر المشروع (IIS أو خيار آخر)</li>
+<li>مراجعة كود نهائية زي الـ Code Review بالشركات</li>
+</ul>
+<h2>🛠️ شو رح تبني؟</h2>
+<p>نفس مشروعك من المستوى 1 بعد إعادة هيكلة، أو مشروع جديد أكبر (نتفق عليه). الهدف مشروع بتقدر تعرضه كـ &quot;مشروع بمستوى شركات&quot; بالـ CV.</p>
+<h2>👥 لمين؟</h2>
+<ul>
+<li>اللي خلّصوا المستوى 1 أو عندهم مشروع Web API شغّال بـ ADO.NET أو أي طريقة</li>
+<li>اللي بدهم يفهموا الـ Patterns بشكل عملي مش بس تعريفات</li>
+</ul>
+<h2>🚫 مش إلك إذا...</h2>
+<ul>
+<li>لسا ما كتبت API بإيدك من قبل: ابدأ بالمستوى 1</li>
+<li>بدك تحفظ أسماء Patterns بدون ما تطبّقها</li>
+</ul>
+<h2>📝 المطلوب منك</h2>
+<p>نفس قواعد المستوى 1: واجب بعد كل لقاء، تسليم على GitHub بداية اللقاء الجاي، ومراجعة على كل محطة بالمشروع.</p>
+<h2>❓ أسئلة</h2>
+<p><strong>إمتى بيبدأ؟</strong> لسا ما في موعد.
+<strong>قديش السعر والمدة؟</strong> بنعلن عنه قريباً.
+<strong>لازم أكون أخذت المستوى 1؟</strong> لا، بس لازم يكون مستواك مكافئ. ممكن نطلب منك توريّنا مشروع سابق أو نعمل مكالمة قصيرة.</p>
+<p>📲 <strong>للاهتمام والاستفسار:</strong> <a href="https://t.me/musabatieh">تواصل معنا على التلغرام</a></p>
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"level-module__XuARUq__page","children":[["$","header",null,{"className":"container page-head","children":[["$","p",null,{"children":["$","$L2",null,{"href":"/workshops/","children":"→ كل الورشات"}]}],["$","p",null,{"className":"eyebrow level-module__XuARUq__level","children":["المستوى ",2]}],["$","h1",null,{"className":"level-module__XuARUq__title","children":"المستوى 2: مشروع باحتراف — EF Core و Patterns و Frontend Framework"}],["$","p",null,{"className":"level-module__XuARUq__titleEn","lang":"en","dir":"ltr","children":"Level 2 — Professional project: EF Core, patterns, and a frontend framework"}],["$","span",null,{"className":"pill  level-module__XuARUq__pill","children":"قريباً"}],["$","p",null,{"className":"lead","children":"مسودة: المستوى الجاي بعد مخيم الخريجين. بتنقل مشروعك من الأساسيات لهيكلة احترافية زي اللي بتشوفها بالشركات."}]]}],false,["$","div",null,{"className":"container","children":["$","section",null,{"className":"CohortBanner-module__gD51wa__banner","aria-labelledby":"cohort-title","children":[["$","h2",null,{"id":"cohort-title","className":"CohortBanner-module__gD51wa__title","children":"ما في دفعة مجدولة حالياً"}],["$","p",null,{"className":"CohortBanner-module__gD51wa__text","children":["لسا ما في موعد أو سعر معلن لهاد المستوى. ","تواصل معنا على التلغرام وبنبلّغك أول ما يفتح التسجيل."]}],["$","div",null,{"className":"btn-row","children":[null,null,["$","a",null,{"className":"btn btn-primary","href":"https://t.me/musabatieh","target":"_blank","rel":"noopener noreferrer","children":"تواصل على تلغرام"}]]}]]}]}],["$","section",null,{"className":"container section","aria-labelledby":"facts-title","children":[["$","h2",null,{"id":"facts-title","className":"sr-only","children":"تفاصيل المستوى"}],["$","div",null,{"className":"grid grid-2","children":[["$","div",null,{"className":"card","children":[["$","h3",null,{"className":"level-module__XuARUq__cardTitle","children":"المتطلبات"}],["$","ul",null,{"className":"level-module__XuARUq__list","children":[["$","li","إنهاء المستوى 1 (مخيم تجهيز الخريجين) أو مستوى مكافئ",{"children":"إنهاء المستوى 1 (مخيم تجهيز الخريجين) أو مستوى مكافئ"}],["$","li","مشروع Web API شغّال بـ C# و SQL Server (تبعك)",{"children":"مشروع Web API شغّال بـ C# و SQL Server (تبعك)"}],["$","li","راحة بالتعامل مع Git: Branches و Pull Requests",{"children":"راحة بالتعامل مع Git: Branches و Pull Requests"}]]}]]}],["$","div",null,{"className":"card","children":[["$","h3",null,{"className":"level-module__XuARUq__cardTitle","children":"شو رح تتعلم"}],["$","ul",null,{"className":"chips","children":[["$","li","ASP.NET Core Web API",{"className":"chip","children":"ASP.NET Core Web API"}],["$","li","Entity Framework Core",{"className":"chip","children":"Entity Framework Core"}],["$","li","Repository Pattern",{"className":"chip","children":"Repository Pattern"}],["$","li","Unit of Work",{"className":"chip","children":"Unit of Work"}],["$","li","Dependency Injection",{"className":"chip","children":"Dependency Injection"}],["$","li","SQL Server",{"className":"chip","children":"SQL Server"}],["$","li","Frontend framework",{"className":"chip","children":"Frontend framework"}]]}],["$","dl",null,{"className":"level-module__XuARUq__facts","children":[null,null,false]}]]}]]}]]}],["$","article",null,{"className":"container","children":["$","div",null,{"className":"prose","dangerouslySetInnerHTML":{"__html":"$3"}}]}],"$L4"]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"3PUsYm9V4GgEWj0NJywp5"}
+4:["$","div",null,{"className":"no-print level-module__XuARUq__stickyCta","children":[["$","span",null,{"className":"level-module__XuARUq__stickyNote","children":"التسجيل قريباً"}],["$","a",null,{"className":"btn btn-primary","href":"https://t.me/musabatieh","target":"_blank","rel":"noopener noreferrer","children":"استفسر على تلغرام"}]]}]
+5:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0ocipm2jtylmf.css","precedence":"next"}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

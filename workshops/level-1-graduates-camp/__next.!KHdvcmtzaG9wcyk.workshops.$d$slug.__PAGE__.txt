@@ -1,0 +1,179 @@
+1:"$Sreact.fragment"
+2:I[22016,["/_next/static/chunks/072nrqj6omvcl.js"],""]
+f:I[97367,["/_next/static/chunks/05-c3ty_6dwfk.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+10:"$Sreact.suspense"
+:HL["/_next/static/chunks/0ocipm2jtylmf.css","style"]
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"level-module__XuARUq__page","children":[["$","header",null,{"className":"container page-head","children":[["$","p",null,{"children":["$","$L2",null,{"href":"/workshops/","children":"→ كل الورشات"}]}],["$","p",null,{"className":"eyebrow level-module__XuARUq__level","children":["المستوى ",1]}],["$","h1",null,{"className":"level-module__XuARUq__title","children":"مخيم تجهيز الخريجين: من مشروع التخرج لأول وظيفة"}],["$","p",null,{"className":"level-module__XuARUq__titleEn","lang":"en","dir":"ltr","children":"Level 1 — Graduates Camp: from graduation project to first job"}],null,["$","p",null,{"className":"lead","children":"مخيم عملي أونلاين 6 أسابيع بتبني فيه مشروع Full Stack متكامل من الصفر بـ C# و SQL Server و HTML/CSS/JS، مرفوع على GitHub وشغّال على سيرفر."}]]}],false,["$","div",null,{"className":"container","children":["$","section",null,{"className":"CohortBanner-module__gD51wa__banner","aria-labelledby":"cohort-title","children":[["$","div",null,{"className":"CohortBanner-module__gD51wa__head","children":[["$","span",null,{"className":"pill pill-success","children":"التسجيل مفتوح"}],["$","h2",null,{"id":"cohort-title","className":"CohortBanner-module__gD51wa__title","children":"الدفعة الجاية"}],["$","p",null,{"className":"CohortBanner-module__gD51wa__cohortName","children":"دفعة كانون الأول 2026"}]]}],["$","dl",null,{"className":"CohortBanner-module__gD51wa__facts","children":[["$","div","البداية",{"children":[["$","dt",null,{"children":"البداية"}],["$","dd",null,{"children":"الاثنين 21 كانون الأول 2026"}]]}],["$","div","الأيام والوقت",{"children":[["$","dt",null,{"children":"الأيام والوقت"}],["$","dd",null,{"children":"الاثنين والأربعاء، 7:00 – 10:00 مساءً بتوقيت الأردن"}]]}],["$","div","المدة",{"children":[["$","dt",null,{"children":"المدة"}],["$","dd",null,{"children":"6 أسابيع · 12 لقاء · 3 ساعات للقاء"}]]}],["$","div","الحضور",{"children":[["$","dt",null,{"children":"الحضور"}],["$","dd",null,{"children":"أونلاين — Microsoft Teams"}]]}],["$","div","السعر",{"children":[["$","dt",null,{"children":"السعر"}],["$","dd",null,{"children":"110 دنانير أردنية"}]]}],["$","div","طريقة الدفع",{"children":[["$","dt",null,{"children":"طريقة الدفع"}],["$","dd",null,{"children":"CliQ"}]]}]]}],["$","p",null,{"className":"CohortBanner-module__gD51wa__policy","children":"أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع 110 دنانير عن طريق CliQ بعد اللقاء الثاني؛ ما في استرجاع بعد الدفع."}],["$","p",null,{"className":"CohortBanner-module__gD51wa__text","children":"أيام اللقاءات ممكن تتغير حسب الجروب، وبنبلّغكم قبلها بوقت كافي."}],false,["$","div",null,{"className":"btn-row","children":[["$","$L2",null,{"className":"btn btn-primary","href":"/workshops/level-1-graduates-camp/register/","children":"سجّل الآن"}],null,["$","a",null,{"className":"btn btn-secondary","href":"https://t.me/musabatieh","target":"_blank","rel":"noopener noreferrer","children":"عندك سؤال؟ راسلنا على تلغرام"}]]}]]}]}],["$","section",null,{"className":"container section","aria-labelledby":"facts-title","children":[["$","h2",null,{"id":"facts-title","className":"sr-only","children":"تفاصيل المستوى"}],["$","div",null,{"className":"grid grid-2","children":[["$","div",null,{"className":"card","children":[["$","h3",null,{"className":"level-module__XuARUq__cardTitle","children":"المتطلبات"}],["$","ul",null,{"className":"level-module__XuARUq__list","children":[["$","li","أساسيات برمجة بأي لغة (متغيرات، شروط، Loops، Functions)",{"children":"أساسيات برمجة بأي لغة (متغيرات، شروط، Loops، Functions)"}],["$","li","لابتوب Windows (عشان IIS و SQL Server) عليه أدوات مجانية: Visual Studio Community، SQL Server Express + SSMS، VS Code، Git",{"children":"لابتوب Windows (عشان IIS و SQL Server) عليه أدوات مجانية: Visual Studio Community، SQL Server Express + SSMS، VS Code، Git"}],["$","li","إنترنت ثابت (المخيم أونلاين)",{"children":"إنترنت ثابت (المخيم أونلاين)"}],["$","li","وقت أسبوعي للواجبات خارج اللقاءات",{"children":"وقت أسبوعي للواجبات خارج اللقاءات"}]]}]]}],["$","div",null,{"className":"card","children":[["$","h3",null,{"className":"level-module__XuARUq__cardTitle","children":"شو رح تتعلم"}],["$","ul",null,{"className":"chips","children":[["$","li","Git & GitHub",{"className":"chip","children":"Git & GitHub"}],["$","li","C# / OOP",{"className":"chip","children":"C# / OOP"}],"$L3","$L4","$L5","$L6","$L7","$L8"]}],"$L9"]}]]}]]}],"$La","$Lb"]}],["$Lc"],"$Ld"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"3PUsYm9V4GgEWj0NJywp5"}
+3:["$","li","ASP.NET Core Web API",{"className":"chip","children":"ASP.NET Core Web API"}]
+4:["$","li","ADO.NET",{"className":"chip","children":"ADO.NET"}]
+5:["$","li","SQL Server",{"className":"chip","children":"SQL Server"}]
+6:["$","li","HTML / CSS",{"className":"chip","children":"HTML / CSS"}]
+7:["$","li","JavaScript (Fetch, DOM)",{"className":"chip","children":"JavaScript (Fetch, DOM)"}]
+8:["$","li","IIS",{"className":"chip","children":"IIS"}]
+9:["$","dl",null,{"className":"level-module__XuARUq__facts","children":[["$","div",null,{"children":[["$","dt",null,{"children":"المدة"}],["$","dd",null,{"children":"6 أسابيع · 12 لقاء · 3 ساعات للقاء"}]]}],["$","div",null,{"children":[["$","dt",null,{"children":"لغة الشرح"}],["$","dd",null,{"children":"عربي (والمصطلحات التقنية بالإنجليزي)"}]]}],["$","div",null,{"children":[["$","dt",null,{"children":"الشهادة"}],["$","dd",null,{"children":"ما في شهادة — شهادتك هي مشروعك"}]]}]]}]
+e:T3d9f,<p>🚀 <strong>مخيم تجهيز الخريجين: من مشروع التخرج لأول وظيفة</strong></p>
+<p>إذا انت خريج أو على أبواب التخرج، وبدك تبني مشروع تخرج قوي، أو مشروع حقيقي تحطّه بالـ CV وتقدّم فيه على الشغل وانت واثق من حالك، هاد المخيم إلك 👌</p>
+<p>👨‍💻 <strong>المحاضر:</strong> م. مصعب عطية، Full Stack Developer شغّال بمجال تطوير البرمجيات</p>
+<h2>🎯 شو الفكرة؟</h2>
+<p>مخيم عملي بعيد عن جو المحاضرات الجامعية. التركيز على التطبيق وفهم الأمور بشكل عميق ومن الأساس، مش حفظ وتلقين.</p>
+<p>بتطلع آخر المخيم بـ <strong>مشروع Full Stack متكامل مبني من الصفر</strong>، مرفوع على GitHub وشغّال على سيرفر.</p>
+<blockquote>
+<p>استثمر بحالك: ابنِ المشروع بإيدك بدل ما تشتري مشروع جاهز. بتطلع بمهارة، مش بس معلومة.</p>
+</blockquote>
+<h2>🧱 ليش مش تشتري مشروع جاهز؟</h2>
+<p>المشروع الجاهز بيبيّن أسهل، بس بيوقف عند أول سؤال باللجنة: &quot;ليش عملتها هيك؟&quot; ونفس السؤال رح يجيك بالإنترفيو.</p>
+<p>هون بتبني مشروعك بإيدك، خطوة خطوة. لما تكون انت كاتب كل سطر، بتعرف تشرحه وتدافع عنه وتعدّل عليه.</p>
+<p>والمستوى 1 كله عن الأساس: مش بس &quot;كيف&quot; نكتب الكود، كمان &quot;ليش&quot; بيشتغل وشو بيصير ورا الكواليس. الحفظ بيروح، والفهم بيضل معك.</p>
+<h2>🤝 معك لآخر الفصل</h2>
+<p>اللقاءات بتخلص بعد 6 أسابيع، بس المتابعة ما بتخلص معها. بنضل معك لآخر الفصل:</p>
+<ul>
+<li>بتضل بجروب التلغرام الخاص بالدفعة، وبتسأل إذا وقفت عند شي</li>
+<li>مراجعة دورية لمشروعك: بنشوف وين وصلت، وبتاخد ملاحظات والخطوة الجاية</li>
+</ul>
+<p>وخليني أكون واضح: المتابعة يعني توجيه ومراجعة. الكود انت بتكتبه، واحنا ما بنكتب المشروع عنك.</p>
+<h2>⏱️ المدة والمواعيد</h2>
+<p>6 أسابيع، 12 لقاء (لقاءين بالأسبوع)، مدة اللقاء 3 ساعات (36 ساعة بالمجمل).</p>
+<ul>
+<li>📅 <strong>البداية:</strong> الاثنين 21 كانون الأول 2026 (أول لقاء)، والنهاية الأربعاء 27 كانون الثاني 2027</li>
+<li>🗓️ <strong>الأيام:</strong> الاثنين والأربعاء، 7:00 – 10:00 مساءً بتوقيت الأردن</li>
+<li>💻 <strong>أونلاين</strong> على Microsoft Teams</li>
+<li>ℹ️ أيام اللقاءات ممكن تتغير حسب الجروب، وبنبلّغكم قبلها بوقت كافي.</li>
+</ul>
+<h2>💰 السعر والدفع</h2>
+<ul>
+<li><strong>السعر:</strong> 110 دنانير أردنية</li>
+<li><strong>أول لقاءين تجربة بدون دفع.</strong> إذا حسّيت إنه المخيم مش إلك، بتوقف بدون ما تدفع شي.</li>
+<li><strong>إذا كمّلت:</strong> بتدفع 110 دنانير عن طريق <strong>CliQ</strong> بعد اللقاء الثاني (تفاصيل الـ CliQ بتوصلك خاص).</li>
+<li><strong>ما في استرجاع بعد الدفع.</strong></li>
+</ul>
+<h2>📚 المحتوى</h2>
+<h3>🔹 المرحلة 1: الأساسيات والأدوات (الأسبوع 1)</h3>
+<ul>
+<li>Git و GitHub: Commits, Branches, Pull Requests</li>
+<li>هيكلة المشروع وتحليل المتطلبات قبل كتابة الكود</li>
+</ul>
+<h3>🔹 المرحلة 2: الـ Backend بـ C# (الأسابيع 2-3)</h3>
+<ul>
+<li>C# و OOP بشكل عملي</li>
+<li>ASP.NET Core Web API</li>
+<li>REST API: Routing, Controllers, HTTP Methods</li>
+<li>التعامل مع قاعدة البيانات باستخدام ADO.NET (SQL Server): كتابة الـ Queries باليد وفهم شو بيصير فعلياً ورا الكواليس، بدون الاعتماد على أدوات بتخبّي التفاصيل</li>
+<li>Validation و Error Handling</li>
+<li>Authentication و Authorization</li>
+</ul>
+<h3>🔹 المرحلة 3: الـ Frontend (الأسابيع 4-5)</h3>
+<ul>
+<li>HTML و CSS: تصميم صفحات مرتبة و Responsive</li>
+<li>JavaScript: DOM و Events</li>
+<li>ربط الواجهة مع الـ API باستخدام Fetch</li>
+</ul>
+<h3>🔹 المرحلة 4: النشر والجاهزية للشغل (الأسبوع 6)</h3>
+<ul>
+<li>نشر المشروع على IIS</li>
+<li>ترتيب الـ GitHub والـ README بشكل احترافي</li>
+<li>كيف تكتب المشروع بالـ CV وتحكي عنه بالإنترفيو</li>
+</ul>
+<p>💼 <strong>وطول المخيم:</strong> نصائح وخبرات عملية من الشغل الحقيقي بالشركات: كيف بيشتغلوا، شو بيدوّروا عليه، وشو الأخطاء اللي لازم تتجنبها.</p>
+<h2>🛠️ شو رح تبني؟ (أمثلة مقترحة)</h2>
+<p>كل طالب بيختار فكرة وبيبنيها بإيده. أمثلة مناسبة لمشروع تخرج، أو مشروع للـ CV، أو كبداية لشغل فريلانس:</p>
+<ol>
+<li><strong>نظام حجز مواعيد لعيادة:</strong> مرضى، أطباء، مواعيد، صلاحيات (Admin / Doctor / Receptionist)، منع تعارض المواعيد.</li>
+<li><strong>نظام إدارة مخزون لمحل أو مستودع:</strong> أصناف، موردين، حركات إدخال/إخراج، تنبيه نقص الكمية، تقارير بسيطة.</li>
+<li><strong>نظام إدارة دورات/مركز تدريب:</strong> دورات، مدربين، طلاب، تسجيل، حضور وغياب، علامات.</li>
+</ol>
+<p>بتقدر تقترح فكرتك الخاصة، بشرط تكون بحجم مناسب لـ 6 أسابيع (بنتفق عليها بأول أسبوع).</p>
+<p>🎓 <strong>ما في شهادة — شهادتك هي مشروعك</strong>: على GitHub، شغّال على سيرفر، وانت بتقدر تشرحه سطر سطر.</p>
+<h2>👥 لمين هاد المخيم؟</h2>
+<ul>
+<li>طلاب السنة الأخيرة اللي بدهم مشروع تخرج يفهموه ويقدروا يدافعوا عنه</li>
+<li>الخريجين اللي بدهم مشروع حقيقي بالـ CV وبالإنترفيو</li>
+<li>اللي بدهم يتحولوا لمجال البرمجة وعندهم أساسيات وجاهزين يتعبوا</li>
+</ul>
+<h2>🚫 مش إلك إذا...</h2>
+<ul>
+<li>بدك مشروع جاهز تسلّمه بدون ما تكتبه</li>
+<li>بدك تحضر وتسمع بس بدون ما تطبّق وتحل واجبات</li>
+<li>ما عندك وقت أسبوعي للتطبيق خارج اللقاءات</li>
+<li>بتدوّر على ضمان وظيفة: المخيم بيعطيك مهارة ومشروع وطريقة تحكي عنه، بس الوظيفة بتعتمد على شغلك وعلى السوق</li>
+<li>بدك شهادة ورقية: ما في شهادة بهاد المخيم</li>
+</ul>
+<h2>📝 طريقة الشغل وشو المطلوب منك</h2>
+<ul>
+<li>المحاضر بيشرح وبيطبّق قدامك خطوة بخطوة</li>
+<li>انت مطلوب منك تطبّق بنفسك وتحل الواجبات بعد كل لقاء</li>
+<li>تسليم الواجب بيكون بداية كل لقاء جديد (كـ commit أو Pull Request على GitHub)</li>
+<li>الطالب عليه جزء أساسي: اللي بيشتغل بيطلع بنتيجة حقيقية 💪</li>
+</ul>
+<p>⚠️ المخيم مش للي بده يسمع ويروّح، هو للي جاهز يشتغل ويتعب على حاله.</p>
+<h2>🔍 كيف بنتابع معك؟</h2>
+<ul>
+<li><strong>كل لقاء:</strong> أول 10-15 دقيقة مراجعة الواجب: ✅ مكتمل · ◐ جزئي · ❌ ما انسلّم</li>
+<li><strong>محطات المشروع:</strong><ul>
+<li>الأسبوع 1-2: تحليل المتطلبات وتصميم قاعدة البيانات</li>
+<li>الأسبوع 3: الـ API شغّال</li>
+<li>الأسبوع 5: الواجهة مربوطة مع الـ API</li>
+<li>الأسبوع 6: المشروع منشور + README مرتب</li>
+</ul>
+</li>
+<li><strong>المراجعة النهائية:</strong> عرض قصير للمشروع + تقييم حسب معايير واضحة + 3 ملاحظات مكتوبة (نقطة قوة، شي لازم يتصلّح، الخطوة الجاية)</li>
+<li><strong>بعد آخر لقاء ولآخر الفصل:</strong> أسئلة على جروب التلغرام الخاص بالدفعة + مراجعة دورية لمشروعك. انت بتكتب الكود، واحنا بنوجّه وبنراجع.</li>
+</ul>
+<p><strong>معايير التقييم (كل معيار من 1 لـ 4):</strong> تحليل المتطلبات وتصميم الـ DB · صحة الـ API · جودة الكود · الواجهة (شغّالة و Responsive) · استخدام Git · النشر والـ README · الالتزام بالواجبات.</p>
+<h2>✍️ كيف بسجّل؟</h2>
+<ol>
+<li>عبّي <a href="register/">نموذج التسجيل</a> هون على الموقع (اسمك، إيميلك، عمرك، وضعك الحالي، اسم جامعتك إذا كنت طالب أو خريج، والهدف من المشروع). بياخد دقيقة.</li>
+<li>قبل بداية المخيم بنتواصل معك <strong>على الإيميل</strong> وبنبعتلك رابط Teams.</li>
+<li>بتحضر <strong>أول لقاءين تجربة بدون دفع</strong>.</li>
+<li>إذا قررت تكمّل: بتدفع 110 دنانير عن طريق <strong>CliQ</strong> بعد اللقاء الثاني، وبنضيفك لجروب التلغرام الخاص بالدفعة.</li>
+</ol>
+<p>عندك سؤال قبل ما تسجّل؟ <a href="https://t.me/musabatieh">راسلنا على التلغرام</a>.</p>
+<h2>❓ أسئلة شائعة</h2>
+<p><strong>كيف بسجّل وشو بصير بعدها؟</strong>
+بتعبّي <a href="register/">نموذج التسجيل</a> على الموقع، وبنرد عليك على الإيميل برابط Teams قبل البداية. بتحضر أول لقاءين تجربة بدون دفع، وإذا كمّلت بتدفع عن طريق CliQ وبنضيفك لجروب التلغرام الخاص بالدفعة.</p>
+<p><strong>إمتى بنضاف لجروب التلغرام؟</strong>
+بعد اللقاء الثاني، لما تقرر تكمّل وتدفع. قبل هيك التواصل بيكون على الإيميل، والتلغرام للأسئلة بس.</p>
+<p><strong>لازم يكون عندي خبرة قبل؟</strong>
+لازم تعرف أساسيات البرمجة بأي لغة. ما بنبدأ من &quot;شو يعني متغير&quot;.</p>
+<p><strong>رح أطلع بمشروع جاهز؟</strong>
+رح تطلع بمشروع <strong>انت كتبته</strong>. إذا ما طبّقت وحليت الواجبات، ما رح يكون عندك مشروع كامل.</p>
+<p><strong>شو يعني متابعة لآخر الفصل؟</strong>
+بعد آخر لقاء ما بتنقطع عنّا: لآخر الفصل بتضل بجروب التلغرام الخاص بالدفعة وبتسأل لما توقف عند شي، وبنعمل مراجعة دورية لمشروعك (بنشوف وين وصلت وبنعطيك ملاحظات والخطوة الجاية). اللي مش داخل فيها: ما بنكتب الكود ولا المشروع عنك. المتابعة توجيه ومراجعة، والشغل عليك. وهي لآخر الفصل، مش لحد التخرج أو لحد ما تلاقي شغل.</p>
+<p><strong>بتضمنولي وظيفة؟</strong>
+لا. ما في حدا بيقدر يضمن وظيفة بصدق. اللي بنقدمه: مهارة عملية، مشروع حقيقي على GitHub، ونصائح كيف تعرضه بالـ CV وبالإنترفيو.</p>
+<p><strong>في شهادة؟</strong>
+لا، ما في شهادة. شهادتك هي مشروعك: مرفوع على GitHub، شغّال على سيرفر، وانت بتقدر تشرحه بالمناقشة وبالإنترفيو.</p>
+<p><strong>المشروع بنفع كمشروع تخرج؟</strong>
+غالباً نعم، بس لازم تتأكد من متطلبات جامعتك ومشرفك. المشروع إلك وانت بتفهمه سطر سطر، وهاد أهم شي بالمناقشة.</p>
+<p><strong>ليش ADO.NET مش Entity Framework؟</strong>
+عشان تفهم شو بيصير فعلياً مع قاعدة البيانات وتكتب الـ SQL بإيدك. الـ EF Core والـ Patterns الأكبر موجودين بالمستوى 2.</p>
+<p><strong>المخيم أونلاين ولا حضوري؟</strong>
+أونلاين بالكامل على Microsoft Teams.</p>
+<p><strong>شو لغة الشرح؟</strong>
+العربي، والمصطلحات التقنية بتضل بالإنجليزي (زي Git و REST API و ADO.NET) لأنه هيك بتلاقيها بالشغل.</p>
+<p><strong>إمتى بيبدأ وشو المواعيد؟</strong>
+البداية الاثنين 21 كانون الأول 2026 (أول لقاء) والنهاية الأربعاء 27 كانون الثاني 2027، لقاءين بالأسبوع (الاثنين والأربعاء)، 3 ساعات كل لقاء، 7:00 – 10:00 مساءً بتوقيت الأردن. الأيام ممكن تتغير حسب الجروب، وبنبلّغكم قبلها بوقت كافي.</p>
+<p><strong>قديش السعر؟</strong>
+110 دنانير أردنية، بتدفعها عن طريق CliQ بعد اللقاء الثاني إذا قررت تكمّل. أول لقاءين تجربة بدون دفع.</p>
+<p><strong>إذا انسحبت؟ في استرجاع؟</strong>
+إذا انسحبت خلال أول لقاءين ما بتدفع شي. بعد ما تدفع (بعد اللقاء الثاني) ما في استرجاع، فخذ قرارك بعد التجربة.</p>
+<p><strong>في عدد محدد للمقاعد؟</strong>
+لا، ما في عدد ثابت لهاي الدفعة.</p>
+<p><strong>إذا غبت عن لقاء؟</strong>
+اللقاءات مباشرة (Live) بس، وما في تسجيلات. إذا غبت، انت المسؤول تلحق: تحل واجب اللقاء، تتابع الـ repo وتحدّث مشروعك، وتسأل على التلغرام إذا وقفت عند شي. الغياب المتكرر بيأثر على مشروعك، فخطّط إنك تحضر كل اللقاءات.</p>
+<p><strong>شو بحتاج على اللابتوب؟</strong>
+لابتوب <strong>Windows</strong> (عشان بنشتغل على SQL Server وبننشر على IIS)، وعليه هاي الأدوات، وكلها مجانية:</p>
+<ul>
+<li>Visual Studio Community (بيجي معه .NET SDK)</li>
+<li>SQL Server Express + SQL Server Management Studio (SSMS)</li>
+<li>VS Code (للـ HTML/CSS/JS)</li>
+<li>Git + حساب على GitHub</li>
+</ul>
+<p>بنساعدك بالتنزيل بأول لقاء إذا احتجت.</p>
+<hr>
+<p>✍️ <strong><a href="register/">سجّل الآن</a></strong> وابدأ تبني مشروعك بإيدك.</p>
+<p>📲 عندك سؤال؟ <a href="https://t.me/musabatieh">راسلنا على التلغرام</a></p>
+a:["$","article",null,{"className":"container","children":["$","div",null,{"className":"prose","dangerouslySetInnerHTML":{"__html":"$e"}}]}]
+b:["$","div",null,{"className":"no-print level-module__XuARUq__stickyCta","children":[["$","$L2",null,{"className":"btn btn-primary","href":"/workshops/level-1-graduates-camp/register/","children":"سجّل الآن"}],["$","a",null,{"className":"btn btn-secondary","href":"https://t.me/musabatieh","target":"_blank","rel":"noopener noreferrer","children":"عندك سؤال؟"}]]}]
+c:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0ocipm2jtylmf.css","precedence":"next"}]
+d:["$","$Lf",null,{"children":["$","$10",null,{"name":"Next.MetadataOutlet","children":"$@11"}]}]
+11:null
