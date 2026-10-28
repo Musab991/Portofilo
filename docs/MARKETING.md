@@ -15,6 +15,7 @@ Goal: fill each cohort with students who will actually do the work, without prom
 7. **No "ready-made project" bashing of people.** Message is "invest in yourself", not shaming students.
 8. **Respect group rules.** Ask admins before posting where required; don't spam the same group daily.
 9. **Results posts need consent.** Student projects/names/screenshots only with permission.
+10. **Mentorship is until the end of the semester — nothing more.** Never write "متابعة لحد التخرج" or "لحد ما تتوظف". Say "لآخر الفصل": questions in the cohort Telegram group + "مراجعة دورية لمشروعك" (no fixed frequency until the owner sets one). Always add that the student writes the code; the owner guides and reviews, he doesn't build the project for them.
 
 CTA in posts: the site register page **`musabatieh.com/workshops/register/`** (on-site form → owner gets an email → owner replies by email with the Teams link). Telegram (`https://t.me/musabatieh`) is for **questions only**, never "register on Telegram"; students join the cohort's Telegram group only after the 2 free sessions, once they continue/pay. Never post the phone number.
 
@@ -31,6 +32,7 @@ What makes it different (all true, from the curriculum):
 - Fundamentals first (SQL by hand with ADO.NET, vanilla JS) → you understand what tools hide.
 - Real output: project on GitHub, deployed on a server, README, how to present it in CV/interview.
 - Follow-up: homework checked every session, milestone reviews, final review with a rubric.
+- Mentorship after the sessions: until the end of the semester, questions in the cohort Telegram group + periodic review of the student's project (guidance only; the student writes the code).
 - Path forward: Level 2 (EF Core, patterns, frontend framework).
 
 Core message: **"استثمر بحالك — ابنِ المشروع بإيدك بدل ما تشتريه جاهز. بتطلع بمهارة، مش بس معلومة. اتعلّم الأساس، وبعدين اطلع مستوى."**
@@ -62,6 +64,7 @@ Cadence per cohort (example, adjust to the real dates):
 | --- | --- | --- |
 | ~4 weeks before start | Announcement (Template A) | All groups + channel + LinkedIn |
 | Every 5–7 days | Value post: one tip/mistake from real work (no hard sell) | Channel, 1–2 groups |
+| ~3 weeks before (once) | Short post A2 ("بدل ما تشتري مشروع...") | Final-year student groups |
 | ~2 weeks before | Reminder (Template B) | Groups where you got interest |
 | Only if a real `registrationDeadline` exists, ~3–5 days before | Registration closes on <date> (Template C) | Channel + groups that asked |
 | Start day | "بلّشنا" short post | Channel |
@@ -82,25 +85,48 @@ Replace `[...]`. Delete any line whose fact you don't have yet — don't guess.
 ```
 🚀 مخيم تجهيز الخريجين: من مشروع التخرج لأول وظيفة
 
-إذا انت خريج أو على أبواب التخرج، وبدك مشروع حقيقي تبنيه بإيدك وتفهمه سطر سطر — مش مشروع جاهز بتسلّمه وبتنساه — هاد المخيم إلك 👌
+إذا انت خريج أو على أبواب التخرج، وبدك مشروع حقيقي تبنيه بإيدك وتفهمه سطر سطر، هاد المخيم إلك.
+
+شو الفكرة؟
+بدل ما تشتري مشروع جاهز وتقدّمه باسمك، ابنيه بإيدك. لما تكون انت كاتب كل سطر، بتعرف تشرحه وتدافع عنه قدام اللجنة وبالإنترفيو.
+والتركيز على الأساس: مش بس كيف نكتب الكود، كمان ليش بيشتغل وشو بيصير ورا الكواليس. مش حفظ وتلقين.
 
 👨‍💻 المحاضر: م. مصعب عطية، Full Stack Developer
-🛠️ بتبني مشروع Full Stack كامل: C# و ASP.NET Core Web API، SQL Server، HTML/CSS/JS، ونشر على سيرفر
-⏱️ 6 أسابيع، 12 لقاء، 3 ساعات كل لقاء (36 ساعة)
-📅 البداية: الاثنين 21 كانون الأول 2026 (أول لقاء)، والنهاية 27 كانون الثاني 2027
+🛠️ مشروع Full Stack كامل: C# و ASP.NET Core Web API، SQL Server، HTML/CSS/JS، ونشر على سيرفر
+⏱️ 6 أسابيع، 12 لقاء، 3 ساعات كل لقاء
+📅 البداية: الاثنين 21 كانون الأول 2026
 🗓️ الاثنين والأربعاء، 7:00 – 10:00 مساءً بتوقيت الأردن (الأيام ممكن تتغير حسب الجروب، وبنبلّغكم قبلها بوقت كافي)
 💻 أونلاين على Microsoft Teams
-💰 السعر: 150 دينار عن طريق CliQ — أول لقاءين تجربة بدون دفع، وبتدفع بعد اللقاء الثاني إذا قررت تكمّل (ما في استرجاع بعد الدفع)
-🎓 ما في شهادة — شهادتك هي مشروعك على GitHub وشغّال على سيرفر
+💰 110 دنانير، أول لقاءين تجربة بدون دفع. إذا كمّلت بتدفع عن طريق CliQ بعد اللقاء الثاني (ما في استرجاع بعد الدفع)
+🤝 بعد ما تخلص اللقاءات بضل معك لآخر الفصل: أسئلة على جروب التلغرام الخاص بالدفعة ومراجعة دورية لمشروعك. الكود انت بتكتبه، وأنا بوجّه وبراجع.
 
-📝 مهم تعرف: في واجب بعد كل لقاء وبتسلّمه بداية اللقاء الجاي. اللي بيشتغل بيطلع بنتيجة، واللي بده يسمع بس، هاد المخيم مش إله.
+📝 مهم تعرف: في واجب بعد كل لقاء. اللي بيشتغل بيطلع بنتيجة حقيقية، واللي بده يسمع بس، هاد المخيم مش إله.
 
-✍️ سجّل من هون (دقيقة وحدة): musabatieh.com/workshops/register/
+✍️ سجّل من هون: musabatieh.com/workshops/register/
 📲 عندك سؤال؟ التلغرام: https://t.me/musabatieh
 ```
-<!-- No "المقاعد محدودة": this cohort has no seat cap. -->
+<!-- No "المقاعد محدودة": this cohort has no seat cap. No certificate line needed here; it's on the site. -->
 
 Optional honest closing line instead of scarcity: `سجّل الآن وابدأ تبني مشروعك بإيدك.`
+
+### A2. Short post: "بدل ما تشتري مشروع..."
+
+```
+بدل ما تشتري مشروع تخرج جاهز وتقدّمه باسمك… شو رأيك تبنيه بإيدك؟
+
+المشروع الجاهز بيوقف عند أول سؤال باللجنة: "ليش عملتها هيك؟"
+المشروع اللي كتبته انت، بتعرف تشرحه وتدافع عنه وتحكي عنه بالإنترفيو.
+
+بمخيم تجهيز الخريجين بنبني المشروع خطوة خطوة، ومنفهم ليش الأشياء بتشتغل، مش بس كيف.
+وبعد آخر لقاء بضل معك لآخر الفصل: بتسأل على جروب الدفعة، وبراجع مشروعك بشكل دوري. انت بتكتب الكود، وأنا بوجّه.
+بس بصراحة: في واجب كل لقاء، وبدها شغل منك.
+
+📅 البداية الاثنين 21 كانون الأول 2026، الاثنين والأربعاء 7–10 مساءً على Teams
+💰 110 دنانير، وأول لقاءين تجربة بدون دفع (CliQ بعد اللقاء الثاني إذا كمّلت)
+
+✍️ musabatieh.com/workshops/register/
+📲 أسئلة: https://t.me/musabatieh
+```
 
 ### B. Reminder
 
@@ -114,7 +140,7 @@ Optional honest closing line instead of scarcity: `سجّل الآن وابدأ 
 ✅ مناسب إلك إذا عندك أساسيات برمجة وجاهز تشتغل
 ❌ مش مناسب إذا بدك مشروع جاهز
 
-💰 أول لقاءين تجربة بدون دفع. إذا كمّلت، بتدفع 150 دينار عن طريق CliQ بعد اللقاء الثاني.
+💰 أول لقاءين تجربة بدون دفع. إذا كمّلت، بتدفع 110 دنانير عن طريق CliQ بعد اللقاء الثاني.
 
 ✍️ التسجيل: musabatieh.com/workshops/register/
 📲 أسئلة: https://t.me/musabatieh
@@ -187,7 +213,10 @@ Rule: if only some students finished, say so or just show those who agreed. Neve
 أساسيات برمجة بأي لغة: متغيرات، شروط، Loops، Functions. ما بنبدأ من الصفر المطلق.
 
 **شو رح آخذ بالضبط؟**
-شرح وتطبيق مباشر، واجبات، مراجعة لشغلك كل لقاء، مراجعة نهائية للمشروع، ونصائح كيف تعرضه بالـ CV وبالإنترفيو.
+شرح وتطبيق مباشر، واجبات، مراجعة لشغلك كل لقاء، مراجعة نهائية للمشروع، ونصائح كيف تعرضه بالـ CV وبالإنترفيو. وبعد آخر لقاء متابعة لآخر الفصل: أسئلة على جروب التلغرام ومراجعة دورية لمشروعك.
+
+**شو يعني متابعة لآخر الفصل؟**
+بعد آخر لقاء بتضل بجروب التلغرام الخاص بالدفعة لآخر الفصل: بتسأل لما توقف عند شي، وبنراجع تقدّم مشروعك بشكل دوري وبنعطيك ملاحظات. ما بنكتب الكود ولا المشروع عنك: المتابعة توجيه ومراجعة، والشغل عليك. وهي لآخر الفصل، مش لحد التخرج أو لحد ما تلاقي شغل.
 
 **شو ما رح آخذ؟**
 ما رح تاخذ مشروع جاهز، ولا ضمان وظيفة، ولا شهادة.
@@ -211,13 +240,13 @@ Rule: if only some students finished, say so or just show those who agreed. Neve
 البداية الاثنين 21 كانون الأول 2026 (أول لقاء) والنهاية الأربعاء 27 كانون الثاني 2027، لقاءين بالأسبوع (الاثنين والأربعاء)، 3 ساعات كل لقاء، 7:00 – 10:00 مساءً بتوقيت الأردن. الأيام ممكن تتغير حسب الجروب، وبنبلّغكم قبلها بوقت كافي.
 
 **كيف بسجّل؟**
-بتعبّي نموذج التسجيل على musabatieh.com/workshops/register/ (الاسم، الإيميل، العمر، وضعك الحالي، والهدف من المشروع). بنرد عليك على الإيميل برابط Teams قبل البداية. أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع عن طريق CliQ وبنضيفك لجروب التلغرام الخاص بالدفعة. التلغرام للأسئلة بس، مش للتسجيل.
+بتعبّي نموذج التسجيل على musabatieh.com/workshops/register/ (الاسم، الإيميل، العمر، وضعك الحالي، اسم جامعتك إذا كنت طالب أو خريج، والهدف من المشروع). بنرد عليك على الإيميل برابط Teams قبل البداية. أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع عن طريق CliQ وبنضيفك لجروب التلغرام الخاص بالدفعة. التلغرام للأسئلة بس، مش للتسجيل.
 
 **في عدد محدد للمقاعد؟**
 لا، ما في عدد ثابت لهاي الدفعة.
 
 **السعر؟ في تقسيط؟**
-150 دينار أردني — [تقسيط نعم/لا: TODO (owner)]. أول لقاءين تجربة بدون دفع، والدفع بعد اللقاء الثاني إذا قررت تكمّل.
+110 دنانير أردنية — [تقسيط نعم/لا: TODO (owner)]. أول لقاءين تجربة بدون دفع، والدفع بعد اللقاء الثاني إذا قررت تكمّل.
 
 **طرق الدفع؟**
 CliQ بس. تفاصيل الـ CliQ بتوصلك خاص بعد اللقاء الثاني.

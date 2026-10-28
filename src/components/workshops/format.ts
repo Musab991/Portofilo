@@ -14,11 +14,19 @@ export function formatDate(iso: string): string {
   return `${DAYS[day]} ${d} ${MONTHS[m - 1]} ${y}`;
 }
 
-const CURRENCIES: Record<string, string> = { JOD: "دينار أردني", USD: "دولار" };
+// [singular, plural]. Arabic counting: the noun is plural when the last two digits are 3–10
+// (e.g. 110 دنانير، 5 دنانير) and singular otherwise (e.g. 150 دينار، 25 دينار).
+const CURRENCIES: Record<string, [string, string]> = {
+  JOD: ["دينار أردني", "دنانير أردنية"],
+  USD: ["دولار", "دولارات"],
+};
 
 export function formatPrice(price: number | null, currency: string): string {
   if (price === null) return "تواصل معنا";
-  return `${price} ${CURRENCIES[currency] ?? currency}`;
+  const names = CURRENCIES[currency];
+  if (!names) return `${price} ${currency}`;
+  const lastTwo = Math.round(price) % 100;
+  return `${price} ${lastTwo >= 3 && lastTwo <= 10 ? names[1] : names[0]}`;
 }
 
 const MODES: Record<Mode, string> = { online: "أونلاين", "in-person": "حضوري", hybrid: "حضوري وأونلاين" };

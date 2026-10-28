@@ -25,7 +25,7 @@ totalSessions: null            # number, e.g. 12
 language: null                 # e.g. "عربي مع المصطلحات بالإنجليزي"
 certificate: null              # true | false | null (null = not decided, hidden)
 telegramUrl: "https://t.me/musabatieh"   # Telegram username/channel link (don't publish a phone number)
-refundPolicy: null             # Arabic text. Level 1 policy: "أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع 150 دينار عن طريق CliQ بعد اللقاء الثاني؛ ما في استرجاع بعد الدفع."
+refundPolicy: null             # Arabic text. Level 1 policy: "أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع 110 دنانير عن طريق CliQ بعد اللقاء الثاني؛ ما في استرجاع بعد الدفع."
 
 cohorts: []                    # no cohort yet. To add one, replace [] with a list like below:
 # cohorts:

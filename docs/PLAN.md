@@ -109,7 +109,7 @@ Breakpoints: base = 360px phone; `48rem` tablet; `64rem` desktop. Max content wi
 
 **Workshop detail `/workshops/[slug]/`** — Banner for that level's cohorts; markdown body (outline, who it's for/not for, what you'll build, requirements, FAQ); sticky bottom CTA on mobile ("سجّل" / "استفسر على تلغرام"). Draft levels show a clear "مسودة — المحتوى قابل للتغيير" notice and no payment button.
 
-**Register `/workshops/[slug]/register/`** (and `/workshops/register/`) — on-site form + steps: (1) fill the form, (2) we reply by email with the Teams link before the start, (3) attend the first 2 sessions free, (4) if you continue, pay 150 JOD via CliQ after session 2 (alias sent privately) and get added to the cohort's Telegram group. Honest note: "أول لقاءين تجربة بدون دفع؛ ما في استرجاع بعد الدفع".
+**Register `/workshops/[slug]/register/`** (and `/workshops/register/`) — on-site form + steps: (1) fill the form, (2) we reply by email with the Teams link before the start, (3) attend the first 2 sessions free, (4) if you continue, pay 110 JOD via CliQ after session 2 (alias sent privately) and get added to the cohort's Telegram group. Honest note: "أول لقاءين تجربة بدون دفع؛ ما في استرجاع بعد الدفع".
 
 ---
 
@@ -249,7 +249,9 @@ One file = one **level** (curriculum). Each level has a `cohorts` list. Adding "
 | Supabase / Cloudflare Worker + DB | Free tiers | 1–3 days | Real backend: auto confirmation email, seat counting, admin view | Must build, secure, and maintain; overkill for v1 |
 
 **Decision (owner, Oct 2026) — replaces the Google Forms plan:** a **native form on the site** (`/workshops/<slug>/register/`, short link `/workshops/register/`) that posts to **FormSubmit** (AJAX, same pattern as `ContactForm.tsx`) and **emails the owner directly** at the cohort's `registrationEmail` (**musabatieh48@gmail.com** — set only in the Level 1 frontmatter). No Google Form, no Sheet.
-- Fields (minimal): الاسم, الإيميل, العمر (15–70), الوضع الحالي (طالب جامعي / خريج / غير ذلك), الهدف من المشروع (مشروع تخرج / مشروع للـ CV والشغل / مشروع للسوق), ملاحظة (optional). Hidden: level slug, cohort id, cohort start date.
+- Fields (minimal): الاسم, الإيميل, العمر (15–70), الوضع الحالي (طالب جامعي / خريج / غير ذلك), اسم الجامعة (shown and required only for طالب جامعي / خريج; Arabic or English; sent as `university` after `current_status`, not sent for غير ذلك), الهدف من المشروع (مشروع تخرج / مشروع للـ CV والشغل / مشروع للسوق), ملاحظة (optional). Hidden: level slug, cohort id, cohort start date.
+- Input hardening (`src/components/workshops/sanitize.ts`): every text value is NFC-normalized, trimmed, whitespace-collapsed, and stripped of control chars and zero-width/bidi-override chars. Name (2–60) and university (2–100) use an allowlist (Arabic letters incl. diacritics/tatweel, Latin letters, spaces, `. - ' ( ) & ,`, digits for university only) and reject `<` `>`, `{{` `}}`, `javascript:`/`data:` and links, with Arabic errors. Note ≤ 300 chars, `<` `>` stripped. Email ≤ 100, strict ASCII pattern. Limits are enforced by `maxLength` and in validation. The subject uses the cleaned name only (no newline/CR can reach it). Spreadsheet formula injection: name/university must start with a letter (digit allowed for university), and a note starting with `= + - @` gets a leading apostrophe. User input is rendered only as React text (no `dangerouslySetInnerHTML` in the form path).
+- Rate limiting (client-side only, static site): one successful submission per 60 s per browser (timestamp in `localStorage`, in-memory fallback), the button is disabled with an Arabic countdown, and an in-flight guard blocks double submits. **Honest limit:** together with the honeypot and minimum fill time this stops accidental/double submits and casual abuse, not a determined attacker (anyone can clear storage or call FormSubmit directly). Real protection is FormSubmit's own spam filtering. Upgrade options: a server/edge function (e.g. a Cloudflare Worker with Turnstile) in front of the email, or FormSubmit's `_captcha` (kept off: its captcha page does not fit the AJAX flow).
 - Subject: `تسجيل جديد — <short level title> (Level N) — دفعة <D> <month> <YYYY> — <الاسم>`, `_template: table`, `_replyto` = student email (owner just hits Reply), honeypot `_honey`, `_captcha: false`, plus a minimum fill time.
 - Flow: form → owner replies **by email** with the Teams link before the start → first 2 sessions free → student who continues pays via **CliQ** after session 2 → owner adds them to the **cohort's Telegram group**. Telegram (`t.me/musabatieh`) is only a secondary "عندك سؤال؟" link, not the registration channel.
 - **FormSubmit one-time activation:** the first submission to a new address is not delivered; FormSubmit emails an "Activate Form" link to that inbox. Owner submits one test registration, clicks Activate (check Spam), then tests again. Afterwards FormSubmit offers a random alias; it can replace the address in `registrationEmail` (the loader accepts an email or an alias) to keep the address out of the page source.
@@ -262,7 +264,7 @@ One file = one **level** (curriculum). Each level has a `cohorts` list. Adding "
 
 ### Payment — honest notes for Jordan
 
-Rule for v1 (owner decision): **the first 2 sessions are a free trial — no payment before session 2.** After session 2, a student who continues pays 150 JOD via **CliQ only**. No refund after payment.
+Rule for v1 (owner decision): **the first 2 sessions are a free trial — no payment before session 2.** After session 2, a student who continues pays 110 JOD via **CliQ only**. No refund after payment.
 
 | Method | Works on static site? | Jordan reality — **verify before publishing** |
 | --- | --- | --- |
@@ -273,9 +275,9 @@ Rule for v1 (owner decision): **the first 2 sessions are a free trial — no pay
 | **PayPal** (PayPal.me link, Payment Links, or Smart Buttons — all work client-side) | Yes, technically easy | **Uncertain**: whether a Jordan-registered PayPal account can *receive* payments and withdraw to a local bank has historically been limited. Verify in your own account (Receive → withdraw to Jordanian bank) and the fees (cross-border + currency conversion) before offering it. Most local students may not have PayPal. Useful mainly for students abroad |
 | Card checkout (Stripe etc.) | Needs provider support | Stripe does not list Jordan as a supported country as far as known — verify; not for v1 |
 
-**Decision v1:** price **150 JOD** (Level 1, owner's current price), **CliQ only**, paid **after session 2**. The owner sends the CliQ alias privately (Telegram) after session 2 — never published or committed. Student sends a payment screenshot on Telegram; owner logs it in the Sheet (columns: paid, amount, date, CliQ reference). PayPal (`paymentUrl`) stays a possible **future** option only, for students abroad, after the owner verifies receiving + withdrawal in Jordan.
+**Decision v1:** price **110 JOD** (Level 1, owner decision; was 150), **CliQ only**, paid **after session 2**. The owner sends the CliQ alias privately (Telegram) after session 2 — never published or committed. Student sends a payment screenshot on Telegram; owner logs it in the Sheet (columns: paid, amount, date, CliQ reference). PayPal (`paymentUrl`) stays a possible **future** option only, for students abroad, after the owner verifies receiving + withdrawal in Jordan.
 
-**Trial & refund policy (owner decision):** the first 2 sessions are a **free trial** (no payment). A student who continues pays **150 JOD via CliQ after session 2**. **No refund after payment.** Arabic text: "أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع 150 دينار عن طريق CliQ بعد اللقاء الثاني؛ ما في استرجاع بعد الدفع." Shown on the level page, register page and FAQ before session 1.
+**Trial & refund policy (owner decision):** the first 2 sessions are a **free trial** (no payment). A student who continues pays **110 JOD via CliQ after session 2**. **No refund after payment.** Arabic text: "أول لقاءين تجربة بدون دفع؛ إذا كمّلت بتدفع 110 دنانير عن طريق CliQ بعد اللقاء الثاني؛ ما في استرجاع بعد الدفع." Shown on the level page, register page and FAQ before session 1.
 
 ---
 
@@ -377,7 +379,8 @@ Acceptance:
 ## 11. Decisions needed from owner
 
 ### Resolved (owner answers, Oct 2026)
-- ~~Price~~ → **150 JOD** for Level 1 (owner's current price; can still change before publishing). Installments still open (see below).
+- ~~Price~~ → **110 JOD** for Level 1 (owner decision; lowered from 150). Installments still open (see below).
+- Mentorship (owner decision): after the 6 weeks, the owner stays with the cohort **until the end of the semester** — questions in the cohort Telegram group + "مراجعة دورية لمشروعك". Guidance and review only; the student writes the code. Never advertised as "until graduation/job". **Open:** review frequency (owner to confirm).
 - ~~Start date~~ → **2026-12-21** (Monday, first session), confirmed. Sessions run Dec 21 – Jan 27; no sessions skipped over the holidays.
 - ~~Session days~~ → **Monday & Wednesday**, 2 per week; days may change based on the group, with advance notice.
 - ~~Session time~~ → **7:00 – 10:00 PM Jordan time** ("7:00 – 10:00 مساءً بتوقيت الأردن").
@@ -389,7 +392,7 @@ Acceptance:
 - ~~Language of instruction~~ → **Arabic**, technical terms in English.
 - ~~Portfolio contact~~ → phone/WhatsApp removed from the portfolio; Telegram https://t.me/musabatieh shown instead.
 - ~~Certificate~~ → **none**; the project (on GitHub, deployed) is the outcome.
-- ~~Registration data~~ → name, email, age, current situation, project goal (required) + optional note. Nothing else.
+- ~~Registration data~~ → name, email, age, current situation, university (only for students/graduates), project goal (required) + optional note. Nothing else.
 - ~~Registration email~~ → **musabatieh48@gmail.com** (`registrationEmail` in the Level 1 frontmatter — the only place it is set). Portfolio contact form email in `src/` unchanged.
 - ~~Telegram role~~ → not a registration channel. Students are added to the cohort's Telegram group after the 2 free sessions, once they continue/pay. Public Telegram link = questions only.
 - ~~Public contact~~ → **https://t.me/musabatieh** (Telegram); the phone number is not published anywhere in the repo.
@@ -399,7 +402,7 @@ Acceptance:
 - ~~Student FAQ~~ → approved by the owner.
 
 ### Still open
-1. **Installments / early-bird** for the 150 JOD price: yes / no.
+1. **Installments / early-bird** for the 110 JOD price: yes / no.
 2. **Activate FormSubmit** for musabatieh48@gmail.com: submit one test registration on `/workshops/register/`, click "Activate Form" in the email (check Spam), test again. Optionally switch `registrationEmail` to the FormSubmit alias afterwards.
 3. **Level 2**: duration, price, start window, and frontend framework (React / Angular / Blazor / Vue).
 4. **Arabic font** (IBM Plex Sans Arabic / Cairo / Tajawal).

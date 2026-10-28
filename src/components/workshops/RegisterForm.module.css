@@ -47,6 +47,7 @@
 }
 
 .field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"],
 .group[aria-invalid="true"] .option {
   border-color: var(--danger);
 }
@@ -135,7 +136,18 @@
 
 .submit:disabled {
   opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit[aria-busy="true"] {
   cursor: wait;
+}
+
+.cooldown {
+  width: 100%;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .error,

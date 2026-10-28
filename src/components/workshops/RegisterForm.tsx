@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { EMAIL_RE, LIMITS, checkText, cleanLine, cleanNote, guardFormula } from "./sanitize";
 import styles from "./RegisterForm.module.css";
 
 /** One cohort the student can register for (serializable; built on the server from the .md data). */
@@ -25,23 +26,74 @@ const AGE_MIN = 15;
 const AGE_MAX = 70;
 
 const SITUATIONS = ["طالب جامعي", "خريج", "غير ذلك"];
+/** Situations that ask for the university name (required for them; not shown/sent for "غير ذلك"). */
+const WITH_UNIVERSITY = ["طالب جامعي", "خريج"];
 const GOALS = ["مشروع تخرج", "مشروع للـ CV والشغل", "مشروع للسوق (فريلانس)"];
 
-type Field = "cohort" | "name" | "email" | "age" | "situation" | "goal";
+type Field = "cohort" | "name" | "email" | "age" | "situation" | "university" | "goal" | "note";
 type Errors = Partial<Record<Field, string>>;
-const ORDER: Field[] = ["cohort", "name", "email", "age", "situation", "goal"];
+const ORDER: Field[] = ["cohort", "name", "email", "age", "situation", "university", "goal", "note"];
+
+/*
+ * Client-side rate limit: one successful submission per 60 s per browser, plus an in-flight guard.
+ * Honest limits: this (with the honeypot and minimum fill time) stops accidental double submits and
+ * casual abuse only. Anyone can clear localStorage or call FormSubmit directly; real protection is
+ * FormSubmit's own spam filtering. Upgrade path: a server/edge function (e.g. a Cloudflare Worker
+ * with Turnstile) or FormSubmit's `_captcha` (its captcha page does not fit the AJAX flow, so it
+ * stays off).
+ */
+const COOLDOWN_MS = 60_000;
+const STORAGE_KEY = "workshops.register.lastSubmit";
+let memoryLastSubmit = 0; // fallback when localStorage is unavailable (private mode, blocked storage)
+
+function readLastSubmit(): number {
+  let stored = 0;
+  try {
+    const value = Number(window.localStorage.getItem(STORAGE_KEY));
+    if (Number.isFinite(value) && value > 0) stored = value;
+  } catch {
+    /* storage unavailable: use the in-memory value */
+  }
+  return Math.max(stored, memoryLastSubmit);
+}
+
+function writeLastSubmit(time: number) {
+  memoryLastSubmit = time;
+  try {
+    window.localStorage.setItem(STORAGE_KEY, String(time));
+  } catch {
+    /* storage unavailable: the in-memory value still applies on this page */
+  }
+}
+
+/** Seconds left in the cooldown (clamped, so a tampered/future timestamp waits at most 60 s). */
+function cooldownSeconds(): number {
+  const left = readLastSubmit() + COOLDOWN_MS - Date.now();
+  return Math.ceil(Math.min(Math.max(left, 0), COOLDOWN_MS) / 1000);
+}
 
 export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [sendError, setSendError] = useState("");
+  const [situation, setSituation] = useState("");
+  const [cooldown, setCooldown] = useState(0);
   const startedAt = useRef(0);
+  const inFlight = useRef(false);
   const successRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const single = cohorts.length === 1 ? cohorts[0] : null;
+  const needsUniversity = WITH_UNIVERSITY.includes(situation);
 
   useEffect(() => {
     startedAt.current = Date.now();
+    const tick = () => setCooldown(cooldownSeconds());
+    const first = window.setTimeout(tick, 0);
+    const timer = window.setInterval(tick, 1000);
+    return () => {
+      window.clearTimeout(first);
+      window.clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -51,18 +103,36 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
   function validate(data: FormData): Errors {
     const next: Errors = {};
     if (!single && !cohorts.some((c) => c.id === data.get("cohort"))) next.cohort = "اختار الدفعة.";
-    if (!String(data.get("name") || "").trim()) next.name = "اكتب اسمك.";
-    const email = String(data.get("email") || "").trim();
+
+    const nameError = checkText("name", cleanLine(data.get("name")), "اكتب اسمك.");
+    if (nameError) next.name = nameError;
+
+    const email = cleanLine(data.get("email"));
     if (!email) next.email = "اكتب إيميلك، عليه بنبعتلك رابط Teams.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = "الإيميل مش صحيح، تأكد منه (مثال: name@gmail.com).";
-    const ageText = String(data.get("age") || "").trim();
+    else if (email.length > LIMITS.email.max) next.email = `الإيميل طويل، الحد الأقصى ${LIMITS.email.max} حرف.`;
+    else if (!EMAIL_RE.test(email) || email.includes("..")) {
+      next.email = "الإيميل مش صحيح، تأكد منه (مثال: name@gmail.com).";
+    }
+
+    const ageText = cleanLine(data.get("age"));
     const age = Number(ageText);
     if (!ageText) next.age = "اكتب عمرك.";
-    else if (!Number.isInteger(age) || age < AGE_MIN || age > AGE_MAX) {
+    else if (!/^\d{1,3}$/.test(ageText) || age < AGE_MIN || age > AGE_MAX) {
       next.age = `العمر لازم يكون رقم بين ${AGE_MIN} و ${AGE_MAX}.`;
     }
-    if (!SITUATIONS.includes(String(data.get("situation")))) next.situation = "اختار وضعك الحالي.";
+
+    const current = String(data.get("situation"));
+    if (!SITUATIONS.includes(current)) next.situation = "اختار وضعك الحالي.";
+    else if (WITH_UNIVERSITY.includes(current)) {
+      const uniError = checkText("university", cleanLine(data.get("university")), "اكتب اسم جامعتك.");
+      if (uniError) next.university = uniError;
+    }
+
     if (!GOALS.includes(String(data.get("goal")))) next.goal = "اختار الهدف من المشروع.";
+
+    if (cleanNote(data.get("note")).length > LIMITS.note.max) {
+      next.note = `الملاحظة طويلة، الحد الأقصى ${LIMITS.note.max} حرف.`;
+    }
     return next;
   }
 
@@ -73,14 +143,24 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
     el?.focus();
   }
 
-  function clearError(event: FormEvent<HTMLFormElement>) {
-    const name = (event.target as HTMLInputElement).name as Field;
+  function onFormChange(event: FormEvent<HTMLFormElement>) {
+    const target = event.target as HTMLInputElement;
+    const name = target.name as Field;
+    if (name === "situation") {
+      setSituation(target.value);
+      if (errors.university) setErrors((prev) => ({ ...prev, university: undefined }));
+    }
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (status === "sending") return;
+    // In-flight guard (a ref, so two fast clicks can't both pass before the re-render).
+    if (inFlight.current || status === "sending") return;
+    if (cooldownSeconds() > 0) {
+      setCooldown(cooldownSeconds());
+      return;
+    }
 
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -106,9 +186,15 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
     }
 
     const cohort = single ?? cohorts.find((c) => c.id === data.get("cohort"))!;
-    const name = String(data.get("name")).trim();
-    const email = String(data.get("email")).trim();
+    // Only cleaned values are sent; name/university/email passed validation (allowlists), so they
+    // contain no newline/CR/control chars and can't break the email subject or reply-to header.
+    const name = cleanLine(data.get("name"));
+    const email = cleanLine(data.get("email"));
+    const currentStatus = String(data.get("situation"));
+    const university = WITH_UNIVERSITY.includes(currentStatus) ? cleanLine(data.get("university")) : null;
+    const note = guardFormula(cleanNote(data.get("note")));
 
+    inFlight.current = true;
     setStatus("sending");
     setSendError("");
 
@@ -121,14 +207,15 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
           body: JSON.stringify({
             name,
             email,
-            age: String(data.get("age")).trim(),
-            current_status: String(data.get("situation")),
+            age: cleanLine(data.get("age")),
+            current_status: currentStatus,
+            ...(university ? { university } : {}),
             goal: String(data.get("goal")),
-            note: String(data.get("note") || "").trim() || "—",
+            note: note || "—",
             level: levelSlug,
             cohort_id: cohort.id,
             cohort_start: cohort.startDate ?? "—",
-            _subject: `${cohort.subjectPrefix} — ${name}`,
+            _subject: cleanLine(`${cohort.subjectPrefix} — ${name}`),
             _replyto: email,
             _template: "table",
             _captcha: "false",
@@ -148,11 +235,15 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
         }
         throw new Error(result.message || "Send failed");
       }
+      writeLastSubmit(Date.now());
+      setCooldown(cooldownSeconds());
       setStatus("sent");
       form.reset();
     } catch {
       setStatus("error");
       setSendError("ما قدرنا نرسل طلبك هلأ. جرّب كمان مرة بعد شوي، أو راسلنا على التلغرام وبنسجّلك.");
+    } finally {
+      inFlight.current = false;
     }
   }
 
@@ -181,9 +272,10 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
         {errors[field]}
       </span>
     ) : null;
+  const sending = status === "sending";
 
   return (
-    <form ref={formRef} className={styles.form} onSubmit={onSubmit} onChange={clearError} noValidate>
+    <form ref={formRef} className={styles.form} onSubmit={onSubmit} onChange={onFormChange} noValidate>
       <label className={styles.honeypot} aria-hidden="true">
         <span>اتركه فاضي</span>
         <input name="_honey" type="text" tabIndex={-1} autoComplete="off" />
@@ -213,8 +305,9 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
         <input
           name="name"
           type="text"
+          dir="auto"
           autoComplete="name"
-          maxLength={100}
+          maxLength={LIMITS.name.max}
           required
           aria-invalid={!!errors.name}
           aria-describedby={describe("name")}
@@ -235,7 +328,7 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
           dir="ltr"
           inputMode="email"
           autoComplete="email"
-          maxLength={160}
+          maxLength={LIMITS.email.max}
           required
           aria-invalid={!!errors.email}
           aria-describedby={["email-hint", describe("email")].filter(Boolean).join(" ")}
@@ -276,6 +369,29 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
         </div>
       </fieldset>
 
+      {needsUniversity && (
+        <label className={styles.field}>
+          <span>
+            اسم الجامعة <span className={styles.req}>(مطلوب)</span>
+          </span>
+          <span id="university-hint" className={styles.hint}>
+            بالعربي أو بالإنجليزي (مثلاً: University of Jordan).
+          </span>
+          <input
+            name="university"
+            type="text"
+            dir="auto"
+            autoComplete="organization"
+            maxLength={LIMITS.university.max}
+            placeholder="مثلاً: الجامعة الأردنية"
+            required
+            aria-invalid={!!errors.university}
+            aria-describedby={["university-hint", describe("university")].filter(Boolean).join(" ")}
+          />
+          {errorText("university")}
+        </label>
+      )}
+
       <fieldset className={styles.group} aria-describedby={describe("goal")} aria-invalid={!!errors.goal}>
         <legend>
           الهدف من المشروع <span className={styles.req}>(مطلوب)</span>
@@ -293,15 +409,35 @@ export function RegisterForm({ levelSlug, cohorts, telegramUrl }: Props) {
 
       <label className={styles.field}>
         <span>
-          ملاحظة <span className={styles.optional}>(اختياري)</span>
+          ملاحظة <span className={styles.optional}>(اختياري، لحد {LIMITS.note.max} حرف)</span>
         </span>
-        <textarea name="note" rows={3} maxLength={500} placeholder="مثلاً: فكرة مشروعك، أو أي سؤال" />
+        <textarea
+          name="note"
+          rows={3}
+          dir="auto"
+          maxLength={LIMITS.note.max}
+          placeholder="مثلاً: فكرة مشروعك، أو أي سؤال"
+          aria-invalid={!!errors.note}
+          aria-describedby={describe("note")}
+        />
+        {errorText("note")}
       </label>
 
       <div className={styles.actions}>
-        <button type="submit" className={`btn btn-primary ${styles.submit}`} disabled={status === "sending"}>
-          {status === "sending" ? "عم نرسل…" : "أرسل طلب التسجيل"}
+        <button
+          type="submit"
+          className={`btn btn-primary ${styles.submit}`}
+          disabled={sending || cooldown > 0}
+          aria-busy={sending}
+          aria-describedby={cooldown > 0 ? "cooldown-msg" : undefined}
+        >
+          {sending ? "عم نرسل…" : "أرسل طلب التسجيل"}
         </button>
+        {cooldown > 0 && (
+          <p id="cooldown-msg" className={styles.cooldown}>
+            استنى {cooldown} ثانية قبل ما ترسل طلب جديد.
+          </p>
+        )}
         <p className={styles.hint}>
           عندك سؤال؟{" "}
           <a href={telegramUrl} target="_blank" rel="noopener noreferrer">
